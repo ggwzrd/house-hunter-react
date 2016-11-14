@@ -13,11 +13,11 @@ const PAGES = [{name: 'home', selected: true}, {name: 'offers', selected: false}
 class Navbar extends Component {
 
   renderPageTabs(page, index){
-    const { changePage } = this.props
+    const { changePage, currentPage } = this.props
     return (
-      <div>
-        <a href="#" key={ index } onClick={ changePage.bind(this, { name: page.name, selected: true }) }>
-          <li id={ page.name } className={ page.selected ? `selected` : null } >{ page.name }</li>
+      <div key={ index }>
+        <a href="#" onClick={ changePage.bind(this, { name: page.name, selected: true }) }>
+          <li className={ currentPage.name === page.name ? 'selected' : null } >{ page.name.toUpperCase() }</li>
         </a>
       </div>
     )
@@ -27,7 +27,7 @@ class Navbar extends Component {
     return(
       <div className="navbar" >
         <ul>
-          { PAGES.map(this.renderPageTabs.bind(this) )}
+          { PAGES.map( this.renderPageTabs.bind(this) )}
         </ul>
       </div>
 
