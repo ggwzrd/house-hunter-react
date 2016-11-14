@@ -1,8 +1,6 @@
 import api from '../middleware/api'
 import appLoading from './loading'
 import userAuthenticated from './user-authenticated'
-import setFormErrors from './set-form-errors'
-import resetFormErrors from './reset-form-errors'
 import destroySessionUser from './destroy-session-user'
 
 export const AUTHENTICATE_USER = 'AUTHENTICATE_USER'
