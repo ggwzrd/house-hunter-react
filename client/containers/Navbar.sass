@@ -1,0 +1,69 @@
+.navbar
+  width: 100%
+  position: fixed
+  font-family: 'helvetica neue',helvetica,arial,'lucida grande',sans-serif
+  -webkit-font-smoothing: antialiased
+  font-size: 20px
+  z-index: 50
+  display: block
+  margin: 0 auto
+  text-align: center
+  top: 0
+  height: 70px
+  background: rgba(255, 255, 255, 0)
+
+  ul
+    display: block
+    height: 100%
+    width: auto
+    z-index: 60
+    margin: 0 auto
+
+    div
+      width: 150px
+      height: 100%
+      z-index: 100
+      display: inline-block
+
+      a
+        width: auto
+        height: 100%
+        z-index: 90
+
+        li
+          width: 100%
+          height: 100%
+          padding: 20px
+          cursor: pointer
+          vertical-align: middle
+          color: white
+          transition: 0.2s
+
+          &.selected
+            transform: scale(1.2)
+            font-weight: 500
+            background:#4080ff
+            color: white
+            border: 1px 1px 1px #F5F5F5
+
+    .fb-login-button
+      text-align: center
+      float: right
+      top: 20px
+      right: -10px
+      max-width: 90px
+      z-index: 110
+      position: fixed
+
+
+    &.logged
+      top: -20px
+      right: -15px
+
+  .wrapper
+    height: auto
+    min-height: 100%
+    display: block
+    z-index: 1
+    padding: 0
+    position: absolute

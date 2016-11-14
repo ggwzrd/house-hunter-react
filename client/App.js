@@ -5,13 +5,18 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import ChatTheme from './styles/base-theme'
 import './App.sass'
 
+import Navbar from './containers/Navbar'
+
 class App extends Component {
   render() {
     return(
       <MuiThemeProvider muiTheme={getMuiTheme(ChatTheme)}>
-        <main className="app">
-          {this.props.children}
-        </main>
+        <div>
+          <Navbar />
+          <main className="app">
+            {this.props.children}
+          </main>
+        </div>
       </MuiThemeProvider>
     );
   }
