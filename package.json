@@ -1,6 +1,6 @@
 {
-  "name": "MemoryGame",
-  "description": "Multiplayer Memory Game with React and FeathersJS.",
+  "name": "HouseHunter",
+  "description": "House Hunter with React and FeathersJS.",
   "version": "0.0.0",
   "homepage": "",
   "main": "src/",
@@ -48,6 +48,9 @@
     "redux-thunk": "^2.1.0",
     "serve-favicon": "^2.3.0",
     "socket.io-client": "^1.4.8",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-facebook-token": "^3.3.0",
     "winston": "^2.2.0"
   },
   "devDependencies": {

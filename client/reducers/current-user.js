@@ -9,12 +9,14 @@ export default (state = JSON.parse(localStorage.getItem('mg.currentUser')) || {}
       localStorage.setItem('mg.currentUser', JSON.stringify(payload))
       return payload
 
+    case 'REGISTER_USER':
+      return payload
+
     case 'DESTROY_SESSION_USER':
       localStorage.removeItem('mg.currentUser')
       return {}
 
     case 'USER_AUTHENTICATED':
-
       return payload
 
     default: return state

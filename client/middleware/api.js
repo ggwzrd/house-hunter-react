@@ -22,12 +22,11 @@ class API {
   }
 
   authenticate(user) {
-    const { email, password } = user
+    const { name , userId } = user
     return this.app.authenticate(
       Object.assign({}, { type: 'local' }, {
-      email,
-      password,
-    }))
+      userId,
+    })).catch((error) => { console.error(error) })
   }
 
   signOut() {

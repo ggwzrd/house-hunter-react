@@ -2,6 +2,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+// components
+import FbLoginButton from '../components/FbLoginButton'
+
 // actions
 import appLoading from '../actions/loading'
 import changePage from '../actions/change-page'
@@ -31,11 +34,13 @@ class Navbar extends Component {
   }
 
   render() {
+    const { currentUser } = this.props
     return(
       <div className="navbar" >
         <ul>
           { PAGES.map( this.renderPageTabs.bind(this) )}
         </ul>
+        { currentUser.hasOwnProperty('facebookId') ? <FbLoginButton className="hidden"/>  : <FbLoginButton /> }
       </div>
 
     )
@@ -48,7 +53,8 @@ Navbar.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    currentPage: state.currentPage
+    currentPage: state.currentPage,
+    currentUser: state.currentUser,
   }
 }
 
