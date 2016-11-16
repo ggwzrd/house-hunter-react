@@ -7,6 +7,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import App from './App'
 import Home from './containers/Home'
+import SignIn from './components/SignIn'
 import NotFound from './containers/NotFound'
 
 injectTapEventPlugin()
@@ -16,6 +17,7 @@ render(
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
+        <Route path="/authenticate" component={SignIn} />
         <Route path="*" component={NotFound}/>
       </Route>
     </Router>

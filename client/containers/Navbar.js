@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 // components
-import FbLoginButton from '../components/FbLoginButton'
+import FacebookAuth from '../components/FacebookAuth'
 
 // actions
 import appLoading from '../actions/loading'
@@ -40,7 +40,7 @@ class Navbar extends Component {
         <ul>
           { PAGES.map( this.renderPageTabs.bind(this) )}
         </ul>
-        { currentUser.hasOwnProperty('facebookId') ? <FbLoginButton className="hidden"/>  : <FbLoginButton /> }
+        { currentUser.hasOwnProperty('facebookId') ? <FacebookAuth className="hidden"/>  : <FacebookAuth /> }
       </div>
 
     )

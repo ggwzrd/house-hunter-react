@@ -1,5 +1,9 @@
 import io from 'socket.io-client';
 import feathers from 'feathers-client';
+import { connect } from 'react-redux'
+
+// actions
+import authenticateUser from '../actions/authenticate-user'
 
 class API {
   constructor() {
@@ -12,8 +16,8 @@ class API {
       .configure(feathers.hooks())
       // Use localStorage to store our login token
       .configure(feathers.authentication({
-        type: 'local',
         storage: window.localStorage,
+        cookie: 'house-hunter-cookie'
       }));
   }
 
@@ -21,12 +25,8 @@ class API {
     return this.app.service(serviceName)
   }
 
-  authenticate(user) {
-    const { name , userId } = user
-    return this.app.authenticate(
-      Object.assign({}, { type: 'local' }, {
-      userId,
-    })).catch((error) => { console.error(error) })
+  authenticate() {
+    return this.app.authenticate()
   }
 
   signOut() {
@@ -36,4 +36,4 @@ class API {
 
 const Api = new API()
 
-export default Api
+export default (Api)

@@ -1,7 +1,6 @@
 import api from '../middleware/api'
 import appLoading from './loading'
 import userAuthenticated from './user-authenticated'
-import registerUser from './register-user'
 import destroySessionUser from './destroy-session-user'
 
 export const AUTHENTICATE_USER = 'AUTHENTICATE_USER'
@@ -13,17 +12,15 @@ const authenticateUser = (user) => {
   }
 }
 
-export default (user) => {
+export default () => {
   return dispatch => {
     // We're loading (communicating with the API asynchronously)
     dispatch(appLoading(true))
     // Here's the new user data, create a User with it
-    api.service('users').find(user)
+    api.authenticate()
     .then((response) => {
-      // response.data has the currentUser...
-      if(response.total <= 0){ dispatch(registerUser(user)) }
-      dispatch(authenticateUser(response.data[0]))
-      dispatch(userAuthenticated(response.data[0]))
+      // response.data has the currentUser..
+      dispatch(authenticateUser(Object.assign({}, response.data, {token: response.token})))
       dispatch(appLoading(false))
     })
     .catch((error) => {

@@ -7,6 +7,12 @@
     "token": {
       "secret": "FEATHERS_AUTH_SECRET"
     },
-    "local": false,
+    "facebook": {
+      "clientID": "1250395821686383",
+      "clientSecret": "a0d0682cfd739c31d96fe6c6dfbf7fdc",
+      "permissions": {
+        "scope": ["public_profile","giulio.gallerini.work@hotmail.com"]
+      }
+    },
   }
 }

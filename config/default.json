@@ -7,7 +7,20 @@
     "token": {
       "secret": "cdnFQSvsERwWU3yNrlrxPlWfJM4+NmA+A4I2jWUPonefFgVW5at8Jm6N79M23xzEWrzAl41Z/6/JQ3mxF45syg=="
     },
-    "local": {},
-    "successRedirect": "/"
+    "local": false,
+    "shouldSetupSuccessRoute": true,
+    "shouldSetupFailureRoute": true,
+    "successRedirect": "/authenticate",
+    "failureRedirect": "/auth/failure",
+    "facebook": {
+      "clientID": "1250395821686383",
+      "clientSecret": "a0d0682cfd739c31d96fe6c6dfbf7fdc",
+      "permissions": {
+        "scope": ["public_profile","email"]
+      }
+    },
+    "cookie": {
+      "name": "house-hunter-cookie"
+    }
   }
 }
