@@ -2,7 +2,7 @@ import AUTHENTICATE_USER from '../actions/authenticate-user'
 import DESTROY_SESSION_USER from '../actions/destroy-session-user'
 import USER_AUTHENTICATED from '../actions/user-authenticated'
 
-export default (state = Object.assign({}, JSON.parse(localStorage.getItem('mg.currentUser')), { authStatus: 'logged_in' }) || { authStatus: 'logged_out' }, { type, payload } = {}) => {
+export default (state = Object.assign({}, JSON.parse(localStorage.getItem('mg.currentUser')), { authStatus: 'connected' }) || { authStatus: 'not_connected' }, { type, payload } = {}) => {
 
   switch (type) {
     case 'AUTHENTICATE_USER':

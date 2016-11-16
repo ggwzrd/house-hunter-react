@@ -60,10 +60,27 @@
       top: -20px
       right: -15px
 
-  .wrapper
-    height: auto
-    min-height: 100%
-    display: block
-    z-index: 1
-    padding: 0
-    position: absolute
+  .wrapper.sign-in
+    position: fixed !important
+    width: 100%
+    height: 100% !important
+    z-index: 100 !important
+    background-color: #4080ff
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-wrap: nowrap
+
+
+    .login
+      position: absolute
+      top: 300px
+      margin-left: 20px
+      z-index: inherit
+
+    a
+      background: #4080ff !important
+
+      &.hidden
+        display: none !important
+        z-index: 0 !important

@@ -3,7 +3,6 @@ import feathers from 'feathers-client';
 import { connect } from 'react-redux'
 
 // actions
-import authenticateUser from '../actions/authenticate-user'
 
 class API {
   constructor() {

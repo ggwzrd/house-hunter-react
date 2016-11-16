@@ -3,10 +3,10 @@ import './Title.sass'
 
 class Title extends Component {
   render() {
-    const { label } = this.props
+    const { label, color } = this.props
 
     return (
-      <h1 id="status">{ label }</h1>
+      <h1 style={{ color: color }} id="status">{ label }</h1>
     )
   }
 }

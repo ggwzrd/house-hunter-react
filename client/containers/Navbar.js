@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 // components
 import FacebookAuth from '../components/FacebookAuth'
+import SignIn from '../components/SignIn'
 
 // actions
 import appLoading from '../actions/loading'
@@ -15,6 +16,7 @@ import './Navbar.sass'
 const PAGES = [{name: 'home', selected: true}, {name: 'offers', selected: false}, {name: 'requests', selected: false}]
 
 class Navbar extends Component {
+  
   selected(page){
     const { changePage, appLoading } = this.props
     appLoading(true)
@@ -22,6 +24,7 @@ class Navbar extends Component {
     setTimeout(() => appLoading(false) , 1000);
 
   }
+
   renderPageTabs(page, index){
     const { changePage, currentPage } = this.props
     return (
@@ -35,12 +38,13 @@ class Navbar extends Component {
 
   render() {
     const { currentUser } = this.props
+
     return(
       <div className="navbar" >
         <ul>
           { PAGES.map( this.renderPageTabs.bind(this) )}
         </ul>
-        { currentUser.hasOwnProperty('facebookId') ? <FacebookAuth className="hidden"/>  : <FacebookAuth /> }
+        <SignIn className={ currentUser.authStatus === 'connected' ? 'hidden' : null } authStatus={ currentUser.authStatus } />
       </div>
 
     )
