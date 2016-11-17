@@ -7,6 +7,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import App from './App'
 import Home from './containers/Home'
+import Feed from './containers/Feed/Feed'
 import FacebookAuth from './components/SignIn'
 import NotFound from './containers/NotFound'
 
@@ -17,6 +18,8 @@ render(
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
+        <Route path="/offers" component={Feed} />
+        <Route path="/requests" component={Feed} />
         <Route path="/authenticate" component={FacebookAuth} />
         <Route path="*" component={NotFound}/>
       </Route>

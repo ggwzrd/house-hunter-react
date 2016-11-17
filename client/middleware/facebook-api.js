@@ -24,25 +24,25 @@ class FacebookApi {
   constructor(){
     this.user = {}
     this.feed = []
+    this.initialized = false
   }
 
   init(){
     window.fbAsyncInit = function() {
       FB.init({
         appId: '1250395821686383',
-        channelUrl: '//connect.facebook.net/en_US/all.js',
         status: true,
         cookie: true,
         xfbml: true,
         version: 'v2.3'
       })
-
       FB.getLoginStatus(function(response) {
         this.statusChangeCallback(response);
       }.bind(this));
 
-      GROUPS.map((group) => {
+      GROUPS.map((group, index) => {
         this.fetchGroupFeed(group)
+        index === 2 ? this.initialized = true : null
       })
     }.bind(this);
 
@@ -51,7 +51,7 @@ class FacebookApi {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      js.src = '//connect.facebook.net/en_US/sdk.js';
+      js.src = '//connect.facebook.net/en_US/all.js';
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   }
@@ -96,7 +96,7 @@ class FacebookApi {
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       Object.assign(this.user, {authStatus: "connected"})
-      this.testAPI();
+      // this.testAPI();
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       Object.assign(this.user, {authStatus: "not_authorized"})
@@ -112,12 +112,26 @@ class FacebookApi {
   // code below.
   checkLoginState() {
     FB.getLoginStatus(function(response) {
-      this.statusChangeCallback(response);
+      this.statusChangeCallback(response)
     }.bind(this));
+  }
+
+  handleClick() {
+    FB.login(this.checkLoginState())
+  }
+
+  render(){
+    // let newPosts = document.getElementsByClassName('new')
+    // setTimeout(function () {
+    //   for(var element of newPosts){
+    //     FB.XFBML.parse(element)
+    //   }
+    // }, 100);
+    FB.XFBML.parse()
   }
 
 }
 
+const facebookApi = new FacebookApi()
 
-
-export default FacebookApi
+export default facebookApi

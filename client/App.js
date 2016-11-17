@@ -7,13 +7,15 @@ import ChatTheme from './styles/base-theme'
 // material-ui elements
 import LinearProgress from 'material-ui/LinearProgress'
 
+// components
+import SignIn from './components/SignIn'
+import Navbar from './containers/Navbar'
+
 // actions
 import appLoading from './actions/loading'
 
 // style
 import './App.sass'
-
-import Navbar from './containers/Navbar'
 
 class App extends Component {
 
@@ -27,12 +29,13 @@ class App extends Component {
   }
 
   render() {
-    const { loading } = this.props
+    const { loading, currentUser } = this.props
 
     return(
       <MuiThemeProvider muiTheme={getMuiTheme(ChatTheme)}>
         <div>
           <LinearProgress mode="indeterminate" className={ loading ? "process-bar" : "hidden" } />
+          <SignIn currentUser={ currentUser }/>
           <Navbar />
           <main className="app">
             {this.props.children}
@@ -45,7 +48,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.loading
+    loading: state.loading,
+    currentUser: state.currentUser,
   }
 }
 

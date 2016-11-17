@@ -1,0 +1,86 @@
+// -- Slide Animations -- //
+
+// Slide Out Top from Center
+@include keyframe(animation-slide-out-up) {
+    0% {
+        transform: translate(0,0);
+    }
+
+    100% {
+        transform: translate(0,-100%);
+    }
+}
+
+@include keyframe(animation-slide-out-down) {
+    0% {
+        transform: translate(0,0);
+    }
+
+    100% {
+        transform: translate(0,100%);
+    }
+}
+
+// Slide Out Left from Center
+@include keyframe(animation-slide-out-left) {
+    0% {
+        transform: translate(0,0);
+    }
+
+    100% {
+        transform: translate(-100%,0);
+    }
+}
+
+// Slide out Right from Center
+@include keyframe(animation-slide-out-right) {
+    0% {
+        transform: translate(0,0);
+    }
+
+    100% {
+        transform: translate(100%,0);
+    }
+}
+
+@include keyframe(animation-slide-in-up) {
+    0% {
+        transform: translate(0,100%);
+    }
+
+    100% {
+        transform: translate(0,0);
+    }
+}
+
+@include keyframe(animation-slide-in-down) {
+    0% {
+        transform: translate(0,-100%);
+    }
+
+    100% {
+        transform: translate(0,0);
+    }
+}
+
+// Slide in Left to Center
+@include keyframe(animation-slide-in-left) {
+    0% {
+        transform: translate(-100%,0);
+    }
+
+    100% {
+        transform: translate(0,0);
+    }
+}
+
+// Slide in Right to Center
+@include keyframe(animation-slide-in-right) {
+    0% {
+        transform: translate(100%,0);
+    }
+
+    100% {
+        transform: translate(0,0);
+    }
+}

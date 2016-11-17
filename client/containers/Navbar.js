@@ -1,10 +1,10 @@
 // dependencies
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { history } from '../store'
 
 // components
 import FacebookAuth from '../components/FacebookAuth'
-import SignIn from '../components/SignIn'
 
 // actions
 import appLoading from '../actions/loading'
@@ -16,13 +16,12 @@ import './Navbar.sass'
 const PAGES = [{name: 'home', selected: true}, {name: 'offers', selected: false}, {name: 'requests', selected: false}]
 
 class Navbar extends Component {
-  
+
   selected(page){
     const { changePage, appLoading } = this.props
     appLoading(true)
     changePage(page)
-    setTimeout(() => appLoading(false) , 1000);
-
+    history.push(`/${page.name === 'home' ? "" : page.name }`)
   }
 
   renderPageTabs(page, index){
@@ -44,7 +43,6 @@ class Navbar extends Component {
         <ul>
           { PAGES.map( this.renderPageTabs.bind(this) )}
         </ul>
-        <SignIn className={ currentUser.authStatus === 'connected' ? 'hidden' : null } authStatus={ currentUser.authStatus } />
       </div>
 
     )

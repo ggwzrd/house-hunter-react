@@ -7,6 +7,8 @@ body
   // background: url("styles/images/bkg-hd-test.jpg")
   width: 100%
   height: auto
+  background: url('http://i.imgur.com/XGIGW7D.jpg') no-repeat !important
+  background-size: cover !important
   font-family: 'helvetica neue',helvetica,arial,'lucida grande',sans-serif
   -webkit-font-smoothing: antialiased
   margin: 0
@@ -16,6 +18,8 @@ body
   padding: 0
   z-index: -1
   overflow: hidden
+  min-height: 100%
+  max-height: 100%
   transition: 0.2s
 
   h1
@@ -90,10 +94,8 @@ body
   .hidden
     display: none !important
 
-
   .process-bar
     background-color: rgba(#000000, .15) !important
 
     div
       background-color: rgba(#4080ff, .5) !important
-      

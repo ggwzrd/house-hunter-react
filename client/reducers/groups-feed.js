@@ -5,7 +5,7 @@ export default (state = { all: [] }, { type, payload } = {}) => {
 
   switch (type) {
     case 'FETCH_GROUPS_FEED':
-      return { all: state.all.concat(payload) }
+      return Object.assign({}, state, { all: payload })
 
     case 'FILTER_POSTS':
       return Object.assign({}, state, payload)

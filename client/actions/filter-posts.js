@@ -1,15 +1,8 @@
-import appLoading from './loading'
-
-
 export const FILTER_POSTS = 'FILTER_POSTS'
 
 export default (posts) => {
   return dispatch => {
-    // We're loading (communicating with the API asynchronously)
-
-      dispatch(filterPosts(filter(posts)))
-      dispatch(appLoading(false))
-
+    dispatch(filterPosts(filter(posts)))
   }
 }
 
@@ -46,8 +39,9 @@ const filter = function(posts){
            })
          console.log('filtration Compleated')
          return{
+           all: [],
            offers: offers,
-           requests: requests
+           requests: requests,
          }
        }else{
          console.log('Empty array')

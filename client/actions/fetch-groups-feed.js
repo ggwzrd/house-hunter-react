@@ -4,7 +4,6 @@ export const FETCH_GROUPS_FEED = 'FETCH_GROUPS_FEED'
 
 export default (feed) => {
   return dispatch => {
-    // We're loading (communicating with the API asynchronously)
     dispatch(fetchGroupsFeed(feed))
   }
 }
