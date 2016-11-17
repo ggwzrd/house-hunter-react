@@ -8,7 +8,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './App'
 import Home from './containers/Home'
 import Feed from './containers/Feed/Feed'
-import FacebookAuth from './components/SignIn'
+import FacebookAuth from './components/FacebookAuth'
 import NotFound from './containers/NotFound'
 
 injectTapEventPlugin()

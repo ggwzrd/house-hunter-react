@@ -20,15 +20,24 @@ import './Feed.sass'
 class Feed extends Component {
 
   componentWillMount(){
-    const { appLoading, fetchGroupsFeed} = this.props
-    appLoading(true)
+    const { posts } = this.props
+
+    const startFetch = setInterval(function () {
+      if(facebookApi.initialized && !posts.hasOwnProperty('offers')){
+        facebookApi.startFetch.bind(facebookApi)()
+        clearInterval(startFetch)
+      }
+    }, 500);
+  }
+
+  componentDidMount(){
+    const { appLoading, fetchGroupsFeed, posts } = this.props
     const fetchGroups = setInterval(()  => {
-      if(facebookApi.initialized && facebookApi.feed.length > 250){
+      if(facebookApi.initialized && facebookApi.feed.length > 250 && !posts.hasOwnProperty('offers')){
         fetchGroupsFeed(facebookApi.feed)
         clearInterval(fetchGroups)
       }
     }, 200);
-
   }
 
   componentDidUpdate() {
@@ -71,7 +80,7 @@ Feed.propTypes = {
 const mapStateToProps = (state) =>{
   return {
     posts: state.groupsFeed,
-    facebookUser: state.currentUser.facebook,
+    facebookUser: state.currentUser,
     currentPage: state.currentPage,
     loading: state.loading
   }

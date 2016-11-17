@@ -14,10 +14,6 @@ import './Home.sass'
 
 class Home extends Component {
 
-  componentDidMount(){
-    this.props.appLoading(false)
-  }
-
   render() {
     return(
       <div className="home">

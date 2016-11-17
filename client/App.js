@@ -29,13 +29,13 @@ class App extends Component {
   }
 
   render() {
-    const { loading, currentUser } = this.props
+    const { loading } = this.props
 
     return(
       <MuiThemeProvider muiTheme={getMuiTheme(ChatTheme)}>
         <div>
           <LinearProgress mode="indeterminate" className={ loading ? "process-bar" : "hidden" } />
-          <SignIn currentUser={ currentUser }/>
+          <SignIn />
           <Navbar />
           <main className="app">
             {this.props.children}
@@ -49,7 +49,6 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     loading: state.loading,
-    currentUser: state.currentUser,
   }
 }
 

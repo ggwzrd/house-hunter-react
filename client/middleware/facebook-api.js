@@ -1,7 +1,7 @@
 // dependencies
 import io from 'socket.io-client';
 import feathers from 'feathers-client';
-
+import updateFacebookUser from '../actions/update-facebook-user'
 
 // costants
 const GROUPS = [
@@ -22,9 +22,13 @@ const GROUPS = [
 class FacebookApi {
 
   constructor(){
-    this.user = {}
+    this.user = {
+      authStatus: 'not_connected',
+      accessToken: '',
+    }
     this.feed = []
     this.initialized = false
+    this.accessTokenExpired = false
   }
 
   init(){
@@ -36,28 +40,25 @@ class FacebookApi {
         xfbml: true,
         version: 'v2.3'
       })
-      FB.getLoginStatus(function(response) {
-        this.statusChangeCallback(response);
-      }.bind(this));
 
-      GROUPS.map((group, index) => {
-        this.fetchGroupFeed(group)
-        index === 2 ? this.initialized = true : null
-      })
-    }.bind(this);
+    };
 
     // Load the SDK asynchronously
     (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      js.src = '//connect.facebook.net/en_US/all.js';
+      js.src = '//connect.facebook.net/en_US/all.js#xfbml=1&appId=1250395821686383';
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   }
 
   setUser(fbUser){
     this.user = fbUser
+  }
+
+  startFetch(){
+    GROUPS.map(this.fetchGroupFeed.bind(this))
   }
 
   fetchGroupFeed(group){
@@ -78,32 +79,42 @@ class FacebookApi {
   // successful.  See statusChangeCallback() for when this call is made.
   testAPI(){
 
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    });
+    FB.api('/me', function(res) {
+      if (!res || res.error) {
+        console.error('Error occured', res.error);
+        this.user.authStatus('not_connected')
+        return false
+      } else {
+        this.user.name = res.name
+        return
+      }
+    }.bind(this))
   }
 
-  // This is called with the results from from FB.getLoginStatus().
+  // This is called with the results from from FB.checkLoginState().
   statusChangeCallback(response) {
-    // const { authenticateUser } = this.props
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
     // for FB.getLoginStatus().
+
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
-      Object.assign(this.user, {authStatus: "connected"})
-      // this.testAPI();
+      this.initialized = true
+      this.testAPI()
+      this.user.authStatus = response.status
+      if(response.authResponse.accessToken !== this.user.accessToken){
+        this.accessTokenExpired = true
+        this.user.accessToken = response.authResponse.accessToken
+        this.user.authStatus = 'connected'
+      }
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
-      Object.assign(this.user, {authStatus: "not_authorized"})
+      this.user.authStatus = response.status
     } else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
-      Object.assign(this.user, {authStatus: "not_connected"})
+      this.user.authStatus = 'not_connected'
     }
   }
 
@@ -120,14 +131,12 @@ class FacebookApi {
     FB.login(this.checkLoginState())
   }
 
-  render(){
-    // let newPosts = document.getElementsByClassName('new')
-    // setTimeout(function () {
-    //   for(var element of newPosts){
-    //     FB.XFBML.parse(element)
-    //   }
-    // }, 100);
-    FB.XFBML.parse()
+  render(elements){
+    for(var element of elements){
+      FB.XFBML.parse()
+      let domElement = document.getElementById(element.postId)
+      domElement.className += 'fb-xfbml-parse-ignore'
+    }
   }
 
 }

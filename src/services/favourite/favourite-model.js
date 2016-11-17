@@ -10,6 +10,7 @@ const Schema = mongoose.Schema;
 
 const favouriteSchema = new Schema({
   postId: { type: String, required: true },
+  createdBy: { type: Number, required: true, 'default': null},
   createdAt: { type: Date, 'default': Date.now },
   updatedAt: { type: Date, 'default': Date.now },
   userId: { type: Schema.Types.ObjectId, ref: 'user' }

@@ -16,12 +16,26 @@ import './Navbar.sass'
 const PAGES = [{name: 'home', selected: true}, {name: 'offers', selected: false}, {name: 'requests', selected: false}]
 
 class Navbar extends Component {
+  componentWillMount(){
+    const { appLoading, currentPage } = this.props
+    appLoading(true)
+  }
+
+  componentDidMount(){
+    const { appLoading, currentPage } = this.props
+
+    setTimeout(() => { appLoading(false) }, 1000)
+  }
 
   selected(page){
-    const { changePage, appLoading } = this.props
-    appLoading(true)
-    changePage(page)
-    history.push(`/${page.name === 'home' ? "" : page.name }`)
+    const { changePage, appLoading, currentPage } = this.props
+
+    if(page.name !== currentPage.name){
+      appLoading(true)
+      changePage(page)
+      history.push(`/${page.name === 'home' ? "" : page.name }`)
+      setTimeout(() => { appLoading(false) }, 2000)
+    }
   }
 
   renderPageTabs(page, index){
@@ -36,7 +50,6 @@ class Navbar extends Component {
   }
 
   render() {
-    const { currentUser } = this.props
 
     return(
       <div className="navbar" >
@@ -56,7 +69,6 @@ Navbar.propTypes = {
 const mapStateToProps = (state) => {
   return {
     currentPage: state.currentPage,
-    currentUser: state.currentUser,
   }
 }
 

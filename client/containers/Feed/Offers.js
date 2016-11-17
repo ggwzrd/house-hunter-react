@@ -20,14 +20,16 @@ let index = 0
 class Offers extends Component {
 
   componentDidMount(){
-    facebookApi.initialized ? facebookApi.render() : null
+    const { offers } = this.props
+    index = 0
+    facebookApi.initialized ? facebookApi.render(offers) : null
   }
 
   componentDidUpdate(){
-    const { offers, appLoading } = this.props
+    const { offers } = this.props
     if(offers.length > index){
-      facebookApi.render()
-      setTimeout(() => { appLoading(false) }, 2000)
+      console.log(facebookApi.initialized)
+      facebookApi.initialized ? facebookApi.render(offers) : null
       index = offers.length
     }
   }
@@ -35,7 +37,7 @@ class Offers extends Component {
   renderOffers(offer, index){
     return(
       <Paper key={ index } style={{ width: '500px', 'borderRadius': '4px' }} zDepth={1} >
-        <div className="fb-post"
+        <div id={offer.postId} className="fb-post"
           data-href={ `https://www.facebook.com/${offer.groupId}/posts/${offer.postId}/` }
           data-width="500">
         </div>

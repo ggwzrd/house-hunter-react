@@ -1,9 +1,11 @@
 // dependencies
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { history } from '../store'
 
 // material-ui
-import RaisedButton from 'material-ui/RaisedButton';
+import RaisedButton from 'material-ui/RaisedButton'
+import RefreshIndicator from 'material-ui/RefreshIndicator'
 
 // components
 import Title from '../components/Title'
@@ -16,17 +18,11 @@ import authenticateUser from '../actions/authenticate-user'
 import './FacebookAuth.sass'
 
 class FacebookAuth extends Component {
-  componentWillMount(){
-    this.props.authenticateUser()
-  }
-
   componentDidMount(){
-
+    console.log('authenticating user')
+    this.props.authenticateUser()
+    history.push('/')
   }
-  componentDidUpdate(){
-
-  }
-
   render() {
     const { className } = this.props
     return(

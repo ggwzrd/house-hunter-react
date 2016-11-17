@@ -1,8 +1,9 @@
 import AUTHENTICATE_USER from '../actions/authenticate-user'
 import DESTROY_SESSION_USER from '../actions/destroy-session-user'
 import USER_AUTHENTICATED from '../actions/user-authenticated'
+import UPDATE_FACEBOOK_USER from '../actions/update-facebook-user'
 
-export default (state = Object.assign({}, JSON.parse(localStorage.getItem('mg.currentUser')), { authStatus: 'connected' }) || { authStatus: 'not_connected' }, { type, payload } = {}) => {
+export default (state = JSON.parse(localStorage.getItem('mg.currentUser')), { type, payload } = {}) => {
 
   switch (type) {
     case 'AUTHENTICATE_USER':
@@ -12,6 +13,9 @@ export default (state = Object.assign({}, JSON.parse(localStorage.getItem('mg.cu
     case 'DESTROY_SESSION_USER':
       localStorage.removeItem('mg.currentUser')
       return {}
+
+    case 'UPDATE_FACEBOOK_USER':
+      return payload
 
     case 'UPDATE_AUTH_STATUS':
       localStorage.setItem('mg.currentUser', JSON.stringify(Object.assign({}, state, payload)))

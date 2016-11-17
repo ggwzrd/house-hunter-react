@@ -20,15 +20,15 @@ let index = 0
 class Requests extends Component {
 
   componentDidMount(){
-    facebookApi.initialized ? facebookApi.render() : null
+    const { requests } = this.props
+    index = 0
+    // facebookApi.initialized ? facebookApi.render(requests) : null
   }
 
   componentDidUpdate(){
-    const { requests, appLoading } = this.props
+    const { requests } = this.props
     if(requests.length > index){
-      facebookApi.render()
-      // appLoading(false)
-      setTimeout(() => { appLoading(false) }, 2000)
+      // facebookApi.initialized ? facebookApi.render() : null
       index = requests.length
     }
   }
@@ -49,7 +49,7 @@ class Requests extends Component {
     return (
       <div className={ className }>
         <div className="list-post">
-          { requests.slice(0, 4).map(this.renderRequests.bind(this)) }
+          { requests.map(this.renderRequests.bind(this)) }
         </div>
       </div>
     )
