@@ -32,7 +32,6 @@ class Requests extends Component {
 
     let clone = requests
     index = 0
-    !!requests && facebookApi.initialized ? facebookApi.render(clone.slice(index, index + 5)) : null
   }
 
   componentDidUpdate(){

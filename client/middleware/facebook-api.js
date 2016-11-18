@@ -131,9 +131,10 @@ class FacebookApi {
   }
 
   render(elements){
-    FB.XFBML.parse()
+    // FB.XFBML.parse()
     for(var element of elements){
-      elements.className += 'fb-xfbml-parse-ignore'
+      FB.XFBML.parse($(element).parent()[0])
+      $(element).parent().className += 'fb-xfbml-parse-ignore'
     }
   }
 

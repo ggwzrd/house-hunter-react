@@ -1,35 +1,11 @@
-@import '../../styles/mixins.scss';
-@import '../../styles/animations.scss';
-
-.offers{
-  padding: 10px;
-  width: 550px;
+.list{
   overflow: scroll;
-  position: relative;
-  height: auto;
+  height: 100%;
   min-height: 100%;
-  margin-top: 50px;
+  padding-top: 100px;
 
-  &.animation-slide-in-up{
-    @include animation(0, 1s, animation-slide-in-up, ease);
+  .post{
+    margin-bottom: 10px
   }
 
-
-  &.leave{
-    @include animation(0, 0.5s, animation-slide-in-down, ease);
-  }
-
-  .list-post{
-    min-height: 100%;
-    max-height: 100%;
-    overflow:scroll;
-
-    div{
-      margin-bottom: 10px;
-    }
-  }
-
-  @media only screen and (max-width : 780px){
-    width: 100%;
-  }
 }

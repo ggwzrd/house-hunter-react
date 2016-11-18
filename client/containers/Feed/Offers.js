@@ -38,26 +38,21 @@ class Offers extends Component {
   componentDidUpdate(){
     const { offers, appLoading } = this.props
 
-    let clone = offers
-    if(!!offers && offers.length > index){
-      if(facebookApi.initialized){
-        const renderOffers = setInterval(function () {
-          let offersElements = document.getElementsByClassName('fb-post')
-          if(offersElements.length > index){
-            facebookApi.render(offersElements)
-            index += 5
-            setTimeout(appLoading.bind(null, false), 2000)
-            clearInterval(renderOffers)
-          }
-        }, 100)
-      }
+    console.log('offers updated')
+    if(facebookApi.initialized){
+      const renderOffers = setInterval(function () {
+        let offersElements = document.getElementsByClassName('fb-post')
+        facebookApi.render(offersElements)
+        setTimeout(appLoading.bind(null, false), 700)
+        clearInterval(renderOffers)
+      }, 100)
     }
   }
 
   renderOffers(offer, index){
     return(
-      <LazyLoad offset={200} once={true}>
-        <Paper key={ index } style={{ width: '500px', 'borderRadius': '4px' }} zDepth={1} >
+      <LazyLoad key={ index } height={400} >
+        <Paper style={{ width: '500px', 'borderRadius': '4px', 'minHeight': '200px' }} zDepth={1} >
           <Heart postId={ offer.postId } groupId={ offer.groupId } message={ offer.message }/>
           <div id={offer.postId} className="fb-post"
             data-href={ `https://www.facebook.com/${offer.groupId}/posts/${offer.postId}/` }
@@ -70,22 +65,18 @@ class Offers extends Component {
   render() {
     const { offers, loading, currentPage } = this.props
 
-    let clone = offers
     return (
-      <div>
+      <div className="list">
+        { !!offers ? offers.map(this.renderOffers.bind(this)) : null}
         <RefreshIndicator
           size={50}
           left={100}
           top={300}
-          style={!loading ? Object.assign({ 'position': 'absolute', 'marginLeft': 'calc(40% - 10px)'}, {'display': 'none'}) : { 'position': 'absolute', 'marginLeft': 'calc(40% - 10px)'} }
+          style={!loading ? Object.assign({ 'position': 'relative', 'marginLeft': 'calc(40% - 10px)'}, {'display': 'none'}) : { 'position': 'relative', 'marginLeft': 'calc(40% - 10px)'} }
           loadingColor="#4080ff"
           status="loading"
         />
-        <div className={`offers ${currentPage.name === 'offers' && !loading ? "animation-slide-in-up" : 'hidden' }`}>
-          <div className="list-post">
-            { !!offers ? clone.slice(index, index + 5).map(this.renderOffers.bind(this)) : null}
-          </div>
-        </div>
+
       </div>
     )
   }
