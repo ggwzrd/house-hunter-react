@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    const { appLoading, fetchGroupsFeed, posts } = this.props
+    const { fetchGroupsFeed, posts } = this.props
     const fetchGroups = setInterval(()  => {
       if(facebookApi.initialized && facebookApi.feed.length > 250 && !posts.hasOwnProperty('offers')){
         fetchGroupsFeed(facebookApi.feed)
@@ -45,19 +45,10 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    const { appLoading, posts, filterPosts, loading  } = this.props
+    const { posts, filterPosts, loading  } = this.props
 
     if(posts.all.length > 200 && !posts.hasOwnProperty('offers')){
       filterPosts(posts.all)
-    }
-  }
-
-  progress(completed) {
-    if (completed > 100) {
-      return 100
-    } else {
-      const diff = Math.random() * 10;
-      setTimeout(() => this.progress(completed + diff), 50)
     }
   }
 
@@ -96,4 +87,4 @@ const mapStateToProps = (state) =>{
   }
 }
 
-export default connect(mapStateToProps, { appLoading, fetchGroupsFeed, filterPosts  })(App)
+export default connect(mapStateToProps, { fetchGroupsFeed, filterPosts  })(App)

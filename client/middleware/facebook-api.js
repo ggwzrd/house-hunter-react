@@ -131,10 +131,9 @@ class FacebookApi {
   }
 
   render(elements){
+    FB.XFBML.parse()
     for(var element of elements){
-      FB.XFBML.parse()
-      let domElement = document.getElementById(element.postId)
-      domElement.className += 'fb-xfbml-parse-ignore'
+      elements.className += 'fb-xfbml-parse-ignore'
     }
   }
 

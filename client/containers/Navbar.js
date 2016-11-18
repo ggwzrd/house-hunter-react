@@ -16,16 +16,6 @@ import './Navbar.sass'
 const PAGES = [{name: 'home', selected: true}, {name: 'offers', selected: false}, {name: 'requests', selected: false}]
 
 class Navbar extends Component {
-  componentWillMount(){
-    const { appLoading, currentPage } = this.props
-    appLoading(true)
-  }
-
-  componentDidMount(){
-    const { appLoading, currentPage } = this.props
-
-    setTimeout(() => { appLoading(false) }, 1000)
-  }
 
   selected(page){
     const { changePage, appLoading, currentPage } = this.props

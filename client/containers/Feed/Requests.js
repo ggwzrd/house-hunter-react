@@ -21,20 +21,37 @@ let index = 0
 
 class Requests extends Component {
 
+  componentWillMount(){
+    const { appLoading } = this.props
+    appLoading(true)
+  }
+
   componentDidMount(){
     const { requests } = this.props
     console.log('requests mounted')
+
+    let clone = requests
     index = 0
-    !!requests && facebookApi.initialized ? facebookApi.render(requests.slice(index, index + 5)) : null
+    !!requests && facebookApi.initialized ? facebookApi.render(clone.slice(index, index + 5)) : null
   }
 
   componentDidUpdate(){
     const { requests } = this.props
 
     console.log('requests updated')
+    let clone = requests
     if(!!requests && requests.length > index){
-      index += requests.length
-      facebookApi.initialized ? facebookApi.render(requests.slice(index, index + 5)) : null
+      if(facebookApi.initialized){
+        const renderRequests = setInterval(function () {
+          let requestsElements = document.getElementsByClassName('fb-post')
+          if(requestsElements.length > index){
+            facebookApi.render(requestsElements)
+            index += 5
+            setTimeout(appLoading.bind(null, false), 2000)
+            clearInterval(renderRequests)
+          }
+        }, 100)
+      }
     }
   }
 
@@ -51,7 +68,7 @@ class Requests extends Component {
   }
   render() {
     const { requests, loading, currentPage } = this.props
-
+    let clone = requests
     return (
       <div>
         <RefreshIndicator
@@ -64,7 +81,7 @@ class Requests extends Component {
         />
         <div className={`requests ${currentPage.name === 'requests' && !loading ? "" : 'hidden' }`}>
           <div className="list-post">
-            { !!requests ? requests.slice(index, index + 5).map(this.renderRequests.bind(this)) : null }
+            { !!requests ? clone.slice(index, index + 5).map(this.renderRequests.bind(this)) : null }
           </div>
         </div>
       </div>

@@ -21,24 +21,33 @@ let index = 0
 
 class Offers extends Component {
 
+  componentWillMount(){
+    const { appLoading } = this.props
+    appLoading(true)
+  }
+
   componentDidMount(){
     const { offers } = this.props
-
     console.log('offers mounted')
+    let clone = offers
     index = 0
-    !!offers && facebookApi.initialized ? facebookApi.render(offers.slice(index, index + 5)) : null
   }
 
   componentDidUpdate(){
-    const { offers } = this.props
+    const { offers, appLoading } = this.props
 
-    console.log('offers updated')
+    let clone = offers
     if(!!offers && offers.length > index){
-      index += offers.length
       if(facebookApi.initialized){
-        setInterval(function () {
-          facebookApi.render(offers.slice(index, index + 5))
-        }, 500);
+        const renderOffers = setInterval(function () {
+          let offersElements = document.getElementsByClassName('fb-post')
+          if(offersElements.length > index){
+            facebookApi.render(offersElements)
+            index += 5
+            setTimeout(appLoading.bind(null, false), 2000)
+            clearInterval(renderOffers)
+          }
+        }, 100)
       }
     }
   }
@@ -56,6 +65,8 @@ class Offers extends Component {
   }
   render() {
     const { offers, loading, currentPage } = this.props
+
+    let clone = offers
     return (
       <div>
         <RefreshIndicator
@@ -68,7 +79,7 @@ class Offers extends Component {
         />
         <div className={`offers ${currentPage.name === 'offers' && !loading ? "animation-slide-in-up" : 'hidden' }`}>
           <div className="list-post">
-            { !!offers ? offers.slice(index, index + 5).map(this.renderOffers.bind(this)) : null}
+            { !!offers ? clone.slice(index, index + 5).map(this.renderOffers.bind(this)) : null}
           </div>
         </div>
       </div>
