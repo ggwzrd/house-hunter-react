@@ -11,6 +11,7 @@ import Paper from 'material-ui/Paper'
 
 // components
 import Title from '../../components/Title'
+import Heart from '../../components/Heart'
 
 // styles
 import './Offers.scss'
@@ -29,7 +30,7 @@ class Offers extends Component {
     const { offers } = this.props
     if(offers.length > index){
       console.log(facebookApi.initialized)
-      facebookApi.initialized ? facebookApi.render(offers) : null
+      // facebookApi.initialized ? facebookApi.render(offers) : null
       index = offers.length
     }
   }
@@ -37,6 +38,7 @@ class Offers extends Component {
   renderOffers(offer, index){
     return(
       <Paper key={ index } style={{ width: '500px', 'borderRadius': '4px' }} zDepth={1} >
+        <Heart postId={ offer.postId } groupId={ offer.groupId } message={ offer.message }/>
         <div id={offer.postId} className="fb-post"
           data-href={ `https://www.facebook.com/${offer.groupId}/posts/${offer.postId}/` }
           data-width="500">

@@ -39,15 +39,17 @@ class SignIn extends Component {
 
       // checking if facebook access token is expired and updating it if true
       if(currentUser.hasOwnProperty('_id')){
-        if(facebookApi.accessTokenExpired && facebookApi.initialized){
+        if(currentUser.facebook.authStatus !== facebookApi.user.authStatus || (facebookApi.accessTokenExpired && facebookApi.initialized)){
           facebookApi.accessTokenExpired = false
+
+          updateAuthStatus(Object.assign({}, currentUser, { facebook: facebookApi.user }))
         }
-        updateAuthStatus(Object.assign({}, currentUser, { facebook: facebookApi.user }))
+
       }else{
         api.service('users').find({ facebookId: facebookApi.user.id })
           .then((res) =>{
             // checking if authStatus is changed and updating it if true
-            currentUser.facebook.authStatus !== facebookApi.user.authStatus ?
+            res.data[0].facebook.authStatus !== facebookApi.user.authStatus ?
               updateAuthStatus(Object.assign({}, res.data[0], { facebook: facebookApi.user })) : null
 
             // updateFacebookUser(res.data[0] , {facebook: facebookApi.user})
@@ -67,6 +69,7 @@ class SignIn extends Component {
   }
   render() {
     const { authStatus } = this.props.currentUser.facebook
+
     return(
       <div className={ `wrapper sign-in ${authStatus === 'connected' ? 'hidden' : "" }`} >
         <Title color="#FFF" label="Please sign in to use this app" />

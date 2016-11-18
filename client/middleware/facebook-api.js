@@ -40,7 +40,6 @@ class FacebookApi {
         xfbml: true,
         version: 'v2.3'
       })
-
     };
 
     // Load the SDK asynchronously
@@ -82,7 +81,7 @@ class FacebookApi {
     FB.api('/me', function(res) {
       if (!res || res.error) {
         console.error('Error occured', res.error);
-        this.user.authStatus('not_connected')
+        this.user.authStatus = 'not_connected'
         return false
       } else {
         this.user.name = res.name

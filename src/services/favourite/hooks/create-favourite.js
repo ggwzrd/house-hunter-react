@@ -11,9 +11,9 @@ module.exports = function(options) {
   options = Object.assign({}, defaults, options);
 
   return function(hook) {
-    const user = hook.params.user;
-
-    // Assign the logged in user as the creator of the game
-    hook.data.userId = user._id;
+    // const user = hook.params.user;
+    //
+    // // Assign the logged in user as the creator of the game
+    // hook.data.userId = user._id;
   };
 };

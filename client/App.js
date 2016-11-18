@@ -10,6 +10,7 @@ import LinearProgress from 'material-ui/LinearProgress'
 // components
 import SignIn from './components/SignIn'
 import Navbar from './containers/Navbar'
+import FavouritesList from './containers/FavouritesList'
 
 // actions
 import appLoading from './actions/loading'
@@ -37,6 +38,7 @@ class App extends Component {
           <LinearProgress mode="indeterminate" className={ loading ? "process-bar" : "hidden" } />
           <SignIn />
           <Navbar />
+          <FavouritesList />
           <main className="app">
             {this.props.children}
           </main>

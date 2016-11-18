@@ -7,7 +7,8 @@ import facebookApi from '../../middleware/facebook-api'
 import appLoading from '../../actions/loading'
 
 // material-ui
-import Paper from 'material-ui/Paper';
+import Paper from 'material-ui/Paper'
+import Heart from '../../components/Heart'
 
 // components
 import Title from '../../components/Title'
@@ -36,6 +37,7 @@ class Requests extends Component {
   renderRequests(requests, index){
     return(
       <Paper key={ index } style={{ width: '500px', 'borderRadius': '4px' }} zDepth={1} >
+        <Heart postId={ requests.postId } groupId={ requests.groupId } message={ requests.message } />
         <div className="fb-post"
           data-href={ `https://www.facebook.com/${requests.groupId}/posts/${requests.postId}/` }
           data-width="500">
