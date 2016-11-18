@@ -8,6 +8,7 @@ import appLoading from '../../actions/loading'
 
 // material-ui
 import Paper from 'material-ui/Paper'
+import RefreshIndicator from 'material-ui/RefreshIndicator'
 
 // components
 import Title from '../../components/Title'
@@ -22,16 +23,23 @@ class Offers extends Component {
 
   componentDidMount(){
     const { offers } = this.props
+
+    console.log('offers mounted')
     index = 0
-    facebookApi.initialized ? facebookApi.render(offers) : null
+    !!offers && facebookApi.initialized ? facebookApi.render(offers.slice(index, index + 5)) : null
   }
 
   componentDidUpdate(){
     const { offers } = this.props
-    if(offers.length > index){
-      console.log(facebookApi.initialized)
-      // facebookApi.initialized ? facebookApi.render(offers) : null
-      index = offers.length
+
+    console.log('offers updated')
+    if(!!offers && offers.length > index){
+      index += offers.length
+      if(facebookApi.initialized){
+        setInterval(function () {
+          facebookApi.render(offers.slice(index, index + 5))
+        }, 500);
+      }
     }
   }
 
@@ -47,11 +55,21 @@ class Offers extends Component {
     )
   }
   render() {
-    const { offers, className } = this.props
+    const { offers, loading, currentPage } = this.props
     return (
-      <div className={ className }>
-        <div className="list-post">
-          { offers.map(this.renderOffers.bind(this)) }
+      <div>
+        <RefreshIndicator
+          size={50}
+          left={100}
+          top={300}
+          style={!loading ? Object.assign({ 'position': 'absolute', 'marginLeft': 'calc(40% - 10px)'}, {'display': 'none'}) : { 'position': 'absolute', 'marginLeft': 'calc(40% - 10px)'} }
+          loadingColor="#4080ff"
+          status="loading"
+        />
+        <div className={`offers ${currentPage.name === 'offers' && !loading ? "animation-slide-in-up" : 'hidden' }`}>
+          <div className="list-post">
+            { !!offers ? offers.slice(index, index + 5).map(this.renderOffers.bind(this)) : null}
+          </div>
         </div>
       </div>
     )
@@ -59,8 +77,17 @@ class Offers extends Component {
 }
 
 Offers.propTypes = {
-  offers: PropTypes.array.isRequired,
-  className: PropTypes.string.isRequired,
+  offers: PropTypes.array,
+  loading: PropTypes.bool.isRequired,
+  currentPage: PropTypes.object.isRequired,
 }
 
-export default connect(null, { appLoading })(Offers)
+const mapStateToProps = (state) => {
+  return{
+    offers: state.groupsFeed.offers,
+    loading: state.loading,
+    currentPage: state.currentPage,
+  }
+}
+
+export default connect(mapStateToProps, { appLoading })(Offers)
