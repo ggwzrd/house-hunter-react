@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import ChatTheme from './styles/base-theme'
+import facebookApi from './middleware/facebook-api'
 
 // material-ui elements
 import LinearProgress from 'material-ui/LinearProgress'
@@ -14,18 +15,40 @@ import FavouritesList from './containers/FavouritesList'
 
 // actions
 import appLoading from './actions/loading'
+import fetchGroupsFeed from './actions/fetch-groups-feed'
+import filterPosts from './actions/filter-posts'
 
 // style
 import './App.sass'
 
 class App extends Component {
 
-  progress(completed) {
-    if (completed > 100) {
-      return 100
-    } else {
-      const diff = Math.random() * 10;
-      setTimeout(() => this.progress(completed + diff), 50)
+  componentWillMount(){
+    const { posts } = this.props
+
+    const startFetch = setInterval(function () {
+      if(facebookApi.initialized && !posts.hasOwnProperty('offers')){
+        facebookApi.startFetch.bind(facebookApi)()
+        clearInterval(startFetch)
+      }
+    }, 500);
+  }
+
+  componentDidMount(){
+    const { fetchGroupsFeed, posts } = this.props
+    const fetchGroups = setInterval(()  => {
+      if(facebookApi.initialized && facebookApi.feed.length > 250 && !posts.hasOwnProperty('offers')){
+        fetchGroupsFeed(facebookApi.feed)
+        clearInterval(fetchGroups)
+      }
+    }, 200);
+  }
+
+  componentDidUpdate() {
+    const { posts, filterPosts, loading  } = this.props
+
+    if(posts.all.length > 200 && !posts.hasOwnProperty('offers')){
+      filterPosts(posts.all)
     }
   }
 
@@ -48,11 +71,20 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+App.propTypes = {
+  posts: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
+  facebookUser: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
+}
+
+const mapStateToProps = (state) =>{
   return {
-    loading: state.loading,
+    posts: state.groupsFeed,
+    facebookUser: state.currentUser,
+    currentPage: state.currentPage,
+    loading: state.loading
   }
 }
 
-
-export default connect(mapStateToProps, { appLoading })(App)
+export default connect(mapStateToProps, { fetchGroupsFeed, filterPosts  })(App)

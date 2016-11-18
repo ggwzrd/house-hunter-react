@@ -1,4 +1,4 @@
-import model from '../models/FavouritesModel'
+import model from '../models/FavouriteModel'
 import { history } from '../store'
 
 import appLoading from './loading'

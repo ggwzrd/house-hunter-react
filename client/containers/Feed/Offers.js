@@ -8,6 +8,7 @@ import appLoading from '../../actions/loading'
 
 // material-ui
 import Paper from 'material-ui/Paper'
+import RefreshIndicator from 'material-ui/RefreshIndicator'
 
 // components
 import Title from '../../components/Title'
@@ -20,18 +21,34 @@ let index = 0
 
 class Offers extends Component {
 
+  componentWillMount(){
+    const { appLoading } = this.props
+    appLoading(true)
+  }
+
   componentDidMount(){
     const { offers } = this.props
+    console.log('offers mounted')
+    let clone = offers
     index = 0
-    facebookApi.initialized ? facebookApi.render(offers) : null
   }
 
   componentDidUpdate(){
-    const { offers } = this.props
-    if(offers.length > index){
-      console.log(facebookApi.initialized)
-      // facebookApi.initialized ? facebookApi.render(offers) : null
-      index = offers.length
+    const { offers, appLoading } = this.props
+
+    let clone = offers
+    if(!!offers && offers.length > index){
+      if(facebookApi.initialized){
+        const renderOffers = setInterval(function () {
+          let offersElements = document.getElementsByClassName('fb-post')
+          if(offersElements.length > index){
+            facebookApi.render(offersElements)
+            index += 5
+            setTimeout(appLoading.bind(null, false), 2000)
+            clearInterval(renderOffers)
+          }
+        }, 100)
+      }
     }
   }
 
@@ -47,11 +64,23 @@ class Offers extends Component {
     )
   }
   render() {
-    const { offers, className } = this.props
+    const { offers, loading, currentPage } = this.props
+
+    let clone = offers
     return (
-      <div className={ className }>
-        <div className="list-post">
-          { offers.map(this.renderOffers.bind(this)) }
+      <div>
+        <RefreshIndicator
+          size={50}
+          left={100}
+          top={300}
+          style={!loading ? Object.assign({ 'position': 'absolute', 'marginLeft': 'calc(40% - 10px)'}, {'display': 'none'}) : { 'position': 'absolute', 'marginLeft': 'calc(40% - 10px)'} }
+          loadingColor="#4080ff"
+          status="loading"
+        />
+        <div className={`offers ${currentPage.name === 'offers' && !loading ? "animation-slide-in-up" : 'hidden' }`}>
+          <div className="list-post">
+            { !!offers ? clone.slice(index, index + 5).map(this.renderOffers.bind(this)) : null}
+          </div>
         </div>
       </div>
     )
@@ -59,8 +88,17 @@ class Offers extends Component {
 }
 
 Offers.propTypes = {
-  offers: PropTypes.array.isRequired,
-  className: PropTypes.string.isRequired,
+  offers: PropTypes.array,
+  loading: PropTypes.bool.isRequired,
+  currentPage: PropTypes.object.isRequired,
 }
 
-export default connect(null, { appLoading })(Offers)
+const mapStateToProps = (state) => {
+  return{
+    offers: state.groupsFeed.offers,
+    loading: state.loading,
+    currentPage: state.currentPage,
+  }
+}
+
+export default connect(mapStateToProps, { appLoading })(Offers)
