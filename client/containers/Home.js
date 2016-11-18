@@ -7,7 +7,6 @@ import appLoading from '../actions/loading'
 
 // components
 import Title from '../components/Title'
-import Feed from './Feed/Feed'
 
 // styles
 import './Home.sass'

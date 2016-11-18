@@ -21,6 +21,7 @@ const iconButtonElement = (
     touch={true}
     tooltip="more"
     tooltipPosition="bottom-left"
+    style={{'zIndex': '300', 'position': 'relative'}}
   >
     <MoreVertIcon color={grey400} />
   </IconButton>
