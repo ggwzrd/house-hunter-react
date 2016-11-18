@@ -1,6 +1,7 @@
 // dipendencies
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import ReactDOM from 'react-dom';
 import facebookApi from '../../middleware/facebook-api'
 
 // actions
@@ -13,6 +14,7 @@ import RefreshIndicator from 'material-ui/RefreshIndicator'
 // components
 import Title from '../../components/Title'
 import Heart from '../../components/Heart'
+import LazyLoad from 'react-lazyload'
 
 // styles
 import './Offers.scss'
@@ -54,13 +56,15 @@ class Offers extends Component {
 
   renderOffers(offer, index){
     return(
-      <Paper key={ index } style={{ width: '500px', 'borderRadius': '4px' }} zDepth={1} >
-        <Heart postId={ offer.postId } groupId={ offer.groupId } message={ offer.message }/>
-        <div id={offer.postId} className="fb-post"
-          data-href={ `https://www.facebook.com/${offer.groupId}/posts/${offer.postId}/` }
-          data-width="500">
-        </div>
-      </Paper>
+      <LazyLoad offset={200} once={true}>
+        <Paper key={ index } style={{ width: '500px', 'borderRadius': '4px' }} zDepth={1} >
+          <Heart postId={ offer.postId } groupId={ offer.groupId } message={ offer.message }/>
+          <div id={offer.postId} className="fb-post"
+            data-href={ `https://www.facebook.com/${offer.groupId}/posts/${offer.postId}/` }
+            data-width="500">
+          </div>
+        </Paper>
+      </LazyLoad>
     )
   }
   render() {
