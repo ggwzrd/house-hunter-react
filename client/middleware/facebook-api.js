@@ -132,9 +132,11 @@ class FacebookApi {
 
   render(elements){
     // FB.XFBML.parse()
+
     for(var element of elements){
       FB.XFBML.parse($(element).parent()[0])
-      $(element).parent().className += 'fb-xfbml-parse-ignore'
+      $(element).removeClass('fb_iframe_widget fb-post')
+      $(element).addClass('fb-xfbml-parse-ignore')
     }
   }
 

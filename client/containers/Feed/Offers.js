@@ -1,7 +1,7 @@
 // dipendencies
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import ReactDOM from 'react-dom';
+import LazyLoad from 'react-lazyload'
 import facebookApi from '../../middleware/facebook-api'
 
 // actions
@@ -14,10 +14,9 @@ import RefreshIndicator from 'material-ui/RefreshIndicator'
 // components
 import Title from '../../components/Title'
 import Heart from '../../components/Heart'
-import LazyLoad from 'react-lazyload'
 
 // styles
-import './Offers.scss'
+import './Feed.sass'
 
 let index = 0
 
@@ -36,9 +35,8 @@ class Offers extends Component {
   }
 
   componentDidUpdate(){
-    const { offers, appLoading } = this.props
+    const { appLoading } = this.props
 
-    console.log('offers updated')
     if(facebookApi.initialized){
       const renderOffers = setInterval(function () {
         let offersElements = document.getElementsByClassName('fb-post')
@@ -50,33 +48,36 @@ class Offers extends Component {
   }
 
   renderOffers(offer, index){
+    const { loading } = this.props
+
     return(
-      <LazyLoad key={ index } height={400} >
-        <Paper style={{ width: '500px', 'borderRadius': '4px', 'minHeight': '200px' }} zDepth={1} >
-          <Heart postId={ offer.postId } groupId={ offer.groupId } message={ offer.message }/>
-          <div id={offer.postId} className="fb-post"
-            data-href={ `https://www.facebook.com/${offer.groupId}/posts/${offer.postId}/` }
-            data-width="500">
-          </div>
-        </Paper>
-      </LazyLoad>
+      <LazyLoad key={ index } offset={100} height={400} once={true}>
+        <div>
+          <RefreshIndicator
+            size={50}
+            left={0}
+            top={100}
+            status={loading ? "loading"  : "hide" }
+            style={{ 'position': 'relative', 'zIndex': '1000'}}
+            loadingColor="#4080ff"
+          />
+          <Paper className="post-container" zDepth={2} >
+            <Heart postId={ offer.postId } groupId={ offer.groupId } message={ offer.message }/>
+            <div id={offer.postId} className="fb-post"
+              data-href={ `https://www.facebook.com/${offer.groupId}/posts/${offer.postId}/` }
+              data-width="380">
+            </div>
+          </Paper>
+        </div>
+        </LazyLoad>
     )
   }
   render() {
-    const { offers, loading, currentPage } = this.props
+    const { offers } = this.props
 
     return (
-      <div className="list">
+      <div className="feed">
         { !!offers ? offers.map(this.renderOffers.bind(this)) : null}
-        <RefreshIndicator
-          size={50}
-          left={100}
-          top={300}
-          style={!loading ? Object.assign({ 'position': 'relative', 'marginLeft': 'calc(40% - 10px)'}, {'display': 'none'}) : { 'position': 'relative', 'marginLeft': 'calc(40% - 10px)'} }
-          loadingColor="#4080ff"
-          status="loading"
-        />
-
       </div>
     )
   }

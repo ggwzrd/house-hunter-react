@@ -9,6 +9,8 @@ import FacebookAuth from '../components/FacebookAuth'
 // actions
 import appLoading from '../actions/loading'
 import changePage from '../actions/change-page'
+
+// styles
 import './Navbar.sass'
 
 // COSTANTS
@@ -34,8 +36,7 @@ class Navbar extends Component {
           'box-shadow': '1px 1px 15px rgba(0,0,0, 1)',
           'color': 'rgb(0,0,0)'
         });
-        console.log(scroll%1000)
-        scroll%1000 <= 100 && scroll%100 >= 100 ? appLoading(true) : null
+        scroll%800 <= 100 && scroll%800 >= 0 ? appLoading(true) : null
         setTimeout(function () {
           $('.navbar').find('li').css('color','rgba(0,0,0,1)');
         }, 10);
