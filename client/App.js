@@ -12,6 +12,7 @@ import LinearProgress from 'material-ui/LinearProgress'
 import SignIn from './components/SignIn'
 import Navbar from './containers/Navbar'
 import FavouritesList from './containers/FavouritesList'
+import AppBackground from './components/AppBackground'
 
 // actions
 import appLoading from './actions/loading'
@@ -62,6 +63,7 @@ class App extends Component {
           <SignIn />
           <Navbar />
           <FavouritesList />
+          <AppBackground imageUrl="http://i.imgur.com/XGIGW7D.jpg"/>
           <main className="app">
             {this.props.children}
           </main>

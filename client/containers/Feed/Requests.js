@@ -1,6 +1,7 @@
 // dipendencies
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import LazyLoad from 'react-lazyload'
 import facebookApi from '../../middleware/facebook-api'
 
 // actions
@@ -15,7 +16,7 @@ import Title from '../../components/Title'
 import Heart from '../../components/Heart'
 
 // styles
-import './Requests.scss'
+import './Feed.sass'
 
 let index = 0
 
@@ -32,58 +33,52 @@ class Requests extends Component {
 
     let clone = requests
     index = 0
-    !!requests && facebookApi.initialized ? facebookApi.render(clone.slice(index, index + 5)) : null
   }
 
   componentDidUpdate(){
-    const { requests } = this.props
+    const { appLoading } = this.props
 
-    console.log('requests updated')
-    let clone = requests
-    if(!!requests && requests.length > index){
-      if(facebookApi.initialized){
-        const renderRequests = setInterval(function () {
-          let requestsElements = document.getElementsByClassName('fb-post')
-          if(requestsElements.length > index){
-            facebookApi.render(requestsElements)
-            index += 5
-            setTimeout(appLoading.bind(null, false), 2000)
-            clearInterval(renderRequests)
-          }
-        }, 100)
-      }
+    if(facebookApi.initialized){
+      const renderRequests = setInterval(function () {
+        let requestsElements = document.getElementsByClassName('fb-post')
+        facebookApi.render(requestsElements)
+        setTimeout(appLoading.bind(null, false), 700)
+        clearInterval(renderRequests)
+      }, 100)
     }
   }
 
   renderRequests(requests, index){
+    const { loading } = this.props
+
     return(
-      <Paper key={ index } style={{ width: '500px', 'borderRadius': '4px' }} zDepth={1} >
-        <Heart postId={ requests.postId } groupId={ requests.groupId } message={ requests.message } />
-        <div className="fb-post"
-          data-href={ `https://www.facebook.com/${requests.groupId}/posts/${requests.postId}/` }
-          data-width="500">
+      <LazyLoad key={ index } offset={100} height={400} once={true}>
+        <div>
+          <RefreshIndicator
+            size={50}
+            left={0}
+            top={100}
+            status={loading ? "loading"  : "hide" }
+            style={{ 'position': 'relative', 'zIndex': '1000'}}
+            loadingColor="#4080ff"
+          />
+          <Paper className="post-container" zDepth={2} >
+            <Heart postId={ requests.postId } groupId={ requests.groupId } message={ requests.message } />
+            <div className="fb-post"
+              data-href={ `https://www.facebook.com/${requests.groupId}/posts/${requests.postId}/` }
+              data-width="380">
+            </div>
+          </Paper>
         </div>
-      </Paper>
-    )
+      </LazyLoad>
+        )
   }
   render() {
-    const { requests, loading, currentPage } = this.props
-    let clone = requests
+    const { requests } = this.props
+
     return (
-      <div>
-        <RefreshIndicator
-          size={50}
-          left={100}
-          top={300}
-          style={!loading ? Object.assign({ 'position': 'absolute', 'marginLeft': 'calc(40% - 10px)'}, {'display': 'none'}) : { 'position': 'absolute', 'marginLeft': 'calc(40% - 10px)'} }
-          loadingColor="#4080ff"
-          status="loading"
-        />
-        <div className={`requests ${currentPage.name === 'requests' && !loading ? "" : 'hidden' }`}>
-          <div className="list-post">
-            { !!requests ? clone.slice(index, index + 5).map(this.renderRequests.bind(this)) : null }
-          </div>
-        </div>
+      <div className="feed">
+        { !!requests ? requests.map(this.renderRequests.bind(this)) : null }
       </div>
     )
   }
