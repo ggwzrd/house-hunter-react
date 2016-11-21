@@ -67,11 +67,12 @@ class SignIn extends Component {
     // handling the different cases (authorization or login)
     authStatus === "not_authorized" ? window.location.replace('/auth/facebook') : facebookApi.handleClick()
   }
+
   render() {
-    const { authStatus } = this.props.currentUser.facebook
+    const { currentUser } = this.props
 
     return(
-      <div className={ `wrapper sign-in ${authStatus === 'connected' ? 'hidden' : "" }`} >
+      <div className={ `wrapper sign-in ${ currentUser.hasOwnProperty('facebook') && currentUser.facebook.authStatus === 'connected' ? 'hidden' : "" }`} >
         <Title color="#FFF" label="Please sign in to use this app" />
         <RefreshIndicator
           size={150}
@@ -81,7 +82,12 @@ class SignIn extends Component {
           loadingColor="#4080ff"
           status="loading"
         />
-        <RaisedButton className={ authStatus === 'connected' ? 'login hidden' : 'login' } label="Primary" primary={true} label={ authStatus === "not_connected" ? "Sign in with Facebook" : "Authorize with Facebook" } onClick={ this.handleClick.bind(this) }/>
+        <RaisedButton
+          className={ currentUser.hasOwnProperty('facebook') && currentUser.facebook.authStatus === 'connected' ? 'login hidden' : 'login' }
+          primary={true}
+          label={ currentUser.hasOwnProperty('facebook') && currentUser.facebook.authStatus === "not_authorized" ? "Authorize with Facebook" : "Sign in with Facebook" }
+          onClick={ this.handleClick.bind(this) }
+        />
       </div>
     )
   }
