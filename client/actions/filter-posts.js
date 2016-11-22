@@ -1,5 +1,11 @@
 export const FILTER_POSTS = 'FILTER_POSTS'
 
+export const orderPosts = (posts) => {
+  return posts.concat().sort((a, b) => {
+    return b.updated_time < a.updated_time ? -1 : 0
+  })
+}
+
 export default (posts) => {
   return dispatch => {
     dispatch(filterPosts(filter(posts)))
@@ -18,6 +24,7 @@ const filter = function(posts){
                var ids = post.id.split('_')
                post.groupId = ids[0]
                post.postId = ids[1]
+               post.updated_time = new Date(post.updated_time).getTime()
                if(res.rating<res.maxRating){
                  post.rating = res.rating
                  post.maxRating = res.maxRating
@@ -40,8 +47,8 @@ const filter = function(posts){
          console.log('filtration Compleated')
          return{
            all: [],
-           offers: offers,
-           requests: requests,
+           offers: orderPosts(offers),
+           requests: orderPosts(requests),
          }
        }else{
          console.log('Empty array')

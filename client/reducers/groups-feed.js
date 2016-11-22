@@ -1,5 +1,5 @@
 import FETCH_GROUPS_FEED from '../actions/fetch-groups-feed'
-// import FILTER_POSTS from '../actions/filter-posts'
+import FILTER_POSTS from '../actions/filter-posts'
 
 export default (state = { all: [] }, { type, payload } = {}) => {
 
