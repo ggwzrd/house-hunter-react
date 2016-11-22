@@ -44,7 +44,7 @@ class FavouritesList extends Component{
           secondaryText={
             <p>
               <span style={{color: darkBlack}}>{ favourite.groupId }</span><br />
-              { favourite.message.substr(50) }
+              { favourite.message.substr(150) }
             </p>
           }
           secondaryTextLines={2}
@@ -58,7 +58,15 @@ class FavouritesList extends Component{
         <Paper className="favourites-container" zDepth={0} >
           <Subheader className="panel-header" >Favourites</Subheader>
           <List className="favourites">
-            { favourites.map(this.renderFavourite) }
+            { favourites.length > 0 ? favourites.map(this.renderFavourite)
+              : <ListItem
+
+                leftAvatar={<Avatar src="http://hashmag.gr/wp-content/uploads/2015/10/cb7e7d15ada5d85ad0aea1f7a5ed58b4.jpg" />}
+                primaryText={ "Add new favourites here" }
+                secondaryText={ "click the heart in the post to start" }
+                secondaryTextLines={2}
+                className="favourite"
+                /> }
           </List>
         </Paper>
     )
