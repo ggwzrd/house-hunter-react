@@ -18,7 +18,8 @@ export default (state = JSON.parse(localStorage.getItem('hh.currentUser')) || {}
       return payload
 
     case 'UPDATE_AUTH_STATUS':
-      localStorage.setItem('hh.currentUser', JSON.stringify(Object.assign({}, state, payload)))
+      
+      localStorage.setItem('hh.currentUser', JSON.stringify(payload))
       return Object.assign({}, state, payload)
 
     case 'USER_AUTHENTICATED':
