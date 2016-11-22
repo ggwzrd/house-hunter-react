@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
+// helpers
+import { nextQuestion, prevQuestion, setStars, saveFeedback } from '../../helpers/feedback-helper'
 // styles
 import './FeedbackForm.scss'
 
@@ -15,48 +17,21 @@ class FeedbackForm extends Component{
 
   onRating(index){
     let { stars } = this.state
-    stars[index].checked = !stars[index].checked
-    for(var i = index; i>=0;i--){
-      stars[i].checked = true
-      this.setState({stars: stars}, null)
-    }
-    if(index!==4){
-      index++
-      for(i = index; i < stars.length ;i++){
-        stars[i].checked = false
-        this.setState({stars: stars}, null)
-      }
-    }
+    this.setState({stars: setStars(stars, index)}, null)
   }
 
   prev(){
     let { scroll } = this.state
-    if($('.feedback').find('.visible').prev('.question').hasClass('question')){
-      var target = $('.feedback').find('.visible').prev()
-      scroll-=239
-      this.setState({scroll: scroll}, null)
-      $('.feedback').animate({
-        scrollTop: scroll
-      }, 200)
-      target.next().removeClass('visible')
-      target.addClass('visible')
-    }
+    this.setState({scroll: prevQuestion(scroll)}, null)
   }
 
   next(){
     let { scroll } = this.state
-    if($('.feedback').find('.visible').next('.question').hasClass('question')){
-      var target = $('.feedback').find('.visible').next()
-      scroll+=239
-      this.setState({scroll: scroll}, null)
-      $('.feedback').animate({
-        scrollTop: scroll
-      }, 200)
-      setTimeout(function () {
-        target.prev().removeClass('visible')
-        target.addClass('visible')
-      }, 200)
-    }
+    this.setState({scroll: nextQuestion(scroll)}, null)
+  }
+
+  save(){
+    saveFeedback()
   }
 
   renderStars(star, index){
@@ -68,6 +43,7 @@ class FeedbackForm extends Component{
       </div>
     )
   }
+
   render(){
     const { showFeedback, stars } = this.state
 
