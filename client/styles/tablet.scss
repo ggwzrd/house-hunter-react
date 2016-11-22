@@ -1,13 +1,12 @@
-$breakpoint-tablet: 768px;
+$breakpoint-tablet: 900px;
 @media (max-width: $breakpoint-tablet) {
-
+  .navbar ul div:first-child{
+    display: inline-block;
+  }
   .favourites-container{
     position: fixed;
     margin: auto;
-    left:22%;
-
-    &.visible{
-      display: none;
-    }
+    left:28%;
+    visibility: hidden;
   }
 }

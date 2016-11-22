@@ -15,12 +15,12 @@ import './Navbar.sass'
 
 // COSTANTS
 
-const PAGES = [{name: 'home', selected: true}, {name: 'offers', selected: false}, {name: 'requests', selected: false}]
+const PAGES = [{name: 'favourites', selected: true}, {name: 'offers', selected: false}, {name: 'requests', selected: false}]
 
 class Navbar extends Component {
   componentWillMount(){
     const { currentPage } = this.props
-    window.location.pathname !== '/' + currentPage.name  && currentPage.name !== 'home' ?
+    window.location.pathname !== '/' + currentPage.name  && currentPage.name !== 'favourites' ?
       history.push(currentPage.name) : null
   }
 
@@ -55,7 +55,7 @@ class Navbar extends Component {
     if(page.name !== currentPage.name){
       appLoading(true)
       changePage(page)
-      history.push(`/${page.name === 'home' ? '' : page.name }`)
+      history.push(`/${page.name === 'favourites' ? '' : page.name }`)
       setTimeout(() => { appLoading(false) }, 2000)
     }
   }
@@ -85,7 +85,7 @@ class Navbar extends Component {
 }
 
 Navbar.propTypes = {
-  currentPage: PropTypes.object,
+  currentPage: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state) => {

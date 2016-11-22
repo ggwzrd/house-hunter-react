@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+// helper method
+import { isVisible } from '../helpers/favourites-helper'
 
 // material-ui
 import Paper from 'material-ui/Paper'
@@ -34,6 +36,16 @@ const rightIconMenu = (
 )
 
 class FavouritesList extends Component{
+  componentDidMount(){
+    const { currentPage } = this.props
+    isVisible(currentPage)
+  }
+
+  componentDidUpdate(){
+    const { currentPage } = this.props
+    isVisible(currentPage)
+  }
+
   renderFavourite(favourite, index){
     return(
         <ListItem
@@ -75,7 +87,8 @@ class FavouritesList extends Component{
 
 const mapStateToProps = (state) =>{
   return{
-    favourites: state.favourites
+    favourites: state.favourites,
+    currentPage: state.currentPage
   }
 }
 
