@@ -8,155 +8,166 @@
   z-index: 50;
   margin: 0;
   padding: 0;
-}
 
-.right-btn-container .feedback-btn{
-  height: 230px;
-  width: 60px;
-  position: absolute;
-  right: 0;
-  background: url("http://i.imgur.com/1KxTui3.png") no-repeat;
-  border: 0;
-  transition: 0.2s;
-}
 
-.right-btn-container .feedback-btn:hover{
-  background: url("http://i.imgur.com/ceKea9y.png") no-repeat;
-}
-.right-btn-container .feedback{
-  width: 427px;
-  height: 239px;
-  position: absolute;
-  right: 40px;
-  background: url("http://i.imgur.com/LEpkCkx.png") no-repeat;
-  background-size: contain;
-  overflow: hidden;
-  display: none;
-  transition: 0.2s;
-}
+   .feedback-btn{
+    height: 230px;
+    width: 60px;
+    position: absolute;
+    right: 0;
+    background: url("http://i.imgur.com/1KxTui3.png") no-repeat;
+    border: 0;
+    transition: 0.2s;
 
-.right-btn-container .feedback .controllers{
-  width: 200px;
-  height: auto;
-  position: fixed;
-  display: flex;
-  justify-content: space-between;
-  color: #CCC;
-  margin-top: 190px;
-  margin-left: 90px;
-}
+    &:hover{
+      background: url("http://i.imgur.com/ceKea9y.png") no-repeat;
+    }
+  }
 
-.right-btn-container .feedback .controllers div{
-  width: auto;
-  height: auto;
-  display: inline-block;
-  color: #CCC;
-  cursor: pointer;
-}
-.right-btn-container .feedback.show{
-  display: inline-block;
-}
 
-.right-btn-container .feedback .controllers .save{
-  color: #4A90E2;
-}
+  .feedback{
+    width: 427px;
+    height: 239px;
+    position: absolute;
+    right: 40px;
+    background: url("http://i.imgur.com/LEpkCkx.png") no-repeat;
+    background-size: contain;
+    overflow: hidden;
+    display: none;
+    transition: 0.2s;
 
-.right-btn-container .feedback .close{
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  margin-top: 10px;
-  margin-left: 340px;
-  position: fixed;
-  float: right;
-  cursor: pointer;
-  border: 1px solid #e0e0e0;
-  border-radius: 18px;
-  transition: 0.2s;
-}
-.right-btn-container .feedback .close h3{
-  color: #858585;
-  font-size: 14px;
-  font-weight: 400;
-  margin: 7px auto;
-  transition: 0.2s;
-}
-.right-btn-container .feedback .close:hover{
-  background-color: #8C0808;
-  border: 1px solid #4D0404;
-}
-.right-btn-container .feedback .close h3:hover{
-  color: white;
-}
+    &.show{
+      display: inline-block;
+    }
 
-.right-btn-container .feedback .question{
-  height: 100%;
-  overflow: hidden;
-}
+    .controllers{
+      width: 200px;
+      height: auto;
+      position: fixed;
+      display: flex;
+      justify-content: space-between;
+      color: #CCC;
+      margin-top: 190px;
+      margin-left: 90px;
 
-.right-btn-container .feedback .question textarea{
-  height: 100px;
-  width: 300px;
-  resize: none;
-  display: block;
-  margin: 0 40px;
-  font-size: 18px;
-  color: #474747;
-  border: 1px solid #CCC;
-  border-radius: 5px;
-}
-.right-btn-container .feedback .question.visible{
-  visibility: visible;
-}
 
-.right-btn-container .feedback .question .title{
-  height: 50px;
-  color: #4A90E2;
-  font-size: 24px;
-}
+      div{
+        width: auto;
+        height: auto;
+        display: inline-block;
+        color: #CCC;
+        cursor: pointer;
+      }
 
-.right-btn-container .feedback #one.question .title{
-  height: 50px;
-  color: #4A90E2;
-  font-size: 24px;
-  margin-left: 60px;
-  margin-top: 50px;
-}
+      .save{
+        color: #4A90E2;
+      }
+    }
 
-.right-btn-container .feedback #two.question .title{
-  margin-left: 40px;
-  margin-top: 30px;
-}
+    .close{
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      margin-top: 10px;
+      margin-left: 340px;
+      position: fixed;
+      float: right;
+      cursor: pointer;
+      border: 1px solid #e0e0e0;
+      border-radius: 18px;
+      transition: 0.2s;
+    }
+    .close h3{
+      color: #858585;
+      font-size: 14px;
+      font-weight: 400;
+      margin: 7px auto;
+      transition: 0.2s;
+    }
+    .close:hover{
+      background-color: #8C0808;
+      border: 1px solid #4D0404;
+    }
+    .close h3:hover{
+      color: white;
+    }
 
-.right-btn-container .feedback .ratings{
-  height: 35px;
-  margin: 5px 85px;
-}
+    .question{
+      height: 100%;
+      overflow: hidden;
 
-.right-btn-container .feedback .ratings .rating{
-  height: 35px;
-  width: 35px;
-  margin-left: 5px;
-  display: inline-block;
-}
-.right-btn-container .feedback .ratings .rating .star{
-  height: 35px;
-  width: 35px;
-  cursor: pointer;
-  background: url("http://i.imgur.com/CbePsYU.png") no-repeat;
-  display: inline-block;
-  background-size: contain;
-  transition: 0.2s;
-}
-.right-btn-container .feedback .ratings .rating .star:hover{
-  background: url("http://i.imgur.com/8g1fPjj.png") no-repeat;
-}
-.right-btn-container .feedback .ratings .rating.checked .star{
-  background: url("http://i.imgur.com/8g1fPjj.png") no-repeat;
-}
+      &.visible{
+        visibility: visible;
+      }
 
-.right-btn-container .feedback .ratings .rating p{
-  color: #C9C9CA;
-  font-size: 12px;
-  position: absolute;
+      textarea{
+        height: 100px;
+        width: 300px;
+        resize: none;
+        display: block;
+        margin: 0 40px;
+        font-size: 18px;
+        color: #474747;
+        border: 1px solid #CCC;
+        border-radius: 5px;
+      }
+
+
+      .title{
+        height: 50px;
+        color: #4A90E2;
+        font-size: 24px;
+      }
+    }
+
+    #one.question .title{
+      height: 50px;
+      color: #4A90E2;
+      font-size: 24px;
+      margin-left: 60px;
+      margin-top: 50px;
+    }
+
+    #two.question .title{
+      margin-left: 40px;
+      margin-top: 30px;
+    }
+
+    .ratings{
+      height: 35px;
+      margin: 5px 85px;
+
+
+      .rating{
+        height: 35px;
+        width: 35px;
+        margin-left: 5px;
+        display: inline-block;
+
+        p{
+          color: #C9C9CA;
+          font-size: 12px;
+          position: absolute;
+        }
+
+        .star{
+          height: 35px;
+          width: 35px;
+          cursor: pointer;
+          background: url("http://i.imgur.com/CbePsYU.png") no-repeat;
+          display: inline-block;
+          background-size: contain;
+          transition: 0.2s;
+
+          &:hover{
+            background: url("http://i.imgur.com/8g1fPjj.png") no-repeat;
+          }
+        }
+      }
+    }
+
+    .ratings .rating.checked .star{
+      background: url("http://i.imgur.com/8g1fPjj.png") no-repeat;
+    }
+  }
 }
