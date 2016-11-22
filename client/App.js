@@ -13,6 +13,7 @@ import SignIn from './components/SignIn'
 import Navbar from './containers/Navbar'
 import FavouritesList from './containers/FavouritesList'
 import AppBackground from './components/AppBackground'
+import FeedbackForm from './containers/Feedback/FeedbackForm'
 
 // actions
 import appLoading from './actions/loading'
@@ -59,11 +60,12 @@ class App extends Component {
     return(
       <MuiThemeProvider muiTheme={getMuiTheme(ChatTheme)}>
         <div>
+          <AppBackground imageUrl="http://i.imgur.com/XGIGW7D.jpg"/>
           <LinearProgress mode="indeterminate" className={ loading ? "process-bar" : "hidden" } />
           <SignIn />
           <Navbar />
           <FavouritesList />
-          <AppBackground imageUrl="http://i.imgur.com/XGIGW7D.jpg"/>
+          <FeedbackForm />
           <main className="app">
             {this.props.children}
           </main>
