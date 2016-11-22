@@ -14,7 +14,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 
-import './FavouritesList.sass'
+import './FavouritesList.scss'
 
 const iconButtonElement = (
   <IconButton
@@ -36,8 +36,8 @@ const rightIconMenu = (
 class FavouritesList extends Component{
   renderFavourite(favourite, index){
     return(
-      <div key={index}>
         <ListItem
+          key={index}
           leftAvatar={<Avatar src="http://hashmag.gr/wp-content/uploads/2015/10/cb7e7d15ada5d85ad0aea1f7a5ed58b4.jpg" />}
           rightIconButton={rightIconMenu}
           primaryText={ favourite.postId }
@@ -48,17 +48,16 @@ class FavouritesList extends Component{
             </p>
           }
           secondaryTextLines={2}
+          className="favourite"
         />
-        <Divider inset={true} />
-      </div>
-        )
+      )
   }
   render(){
     const { favourites } = this.props
     return(
-        <Paper className="favourites-container">
-          <List>
-            <Subheader>Favourites</Subheader>
+        <Paper className="favourites-container" zDepth={0} >
+          <Subheader className="panel-header" >Favourites</Subheader>
+          <List className="favourites">
             { favourites.map(this.renderFavourite) }
           </List>
         </Paper>

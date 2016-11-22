@@ -1,0 +1,26 @@
+.favourites-container{
+  width: 350px !important;
+  position: fixed;
+  z-index: 10;
+  top: 100px;
+  left: 50px;
+  background-color: transparent !important;
+
+  .panel-header{
+    background-color: #4080ff;
+    color: white !important;
+  }
+
+  .favourites {
+    max-height: 585px;
+    overflow: scroll;
+    padding-top: 0 !important;
+
+    .favourite{
+      background-color: white !important;
+      box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.7);
+      margin-bottom: 10px !important;
+    }
+  }
+
+}

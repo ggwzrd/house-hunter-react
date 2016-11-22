@@ -22,6 +22,8 @@ import filterPosts from './actions/filter-posts'
 
 // style
 import './App.sass'
+import './styles/tablet.scss'
+import './styles/mobile.scss'
 
 class App extends Component {
 

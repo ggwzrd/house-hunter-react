@@ -68,6 +68,11 @@ class SignIn extends Component {
     authStatus === "not_authorized" ? window.location.replace('/auth/facebook') : facebookApi.handleClick()
   }
 
+  componentDidUpdate(){
+    console.log('sign in updated')
+
+  }
+
   render() {
     const { currentUser } = this.props
 

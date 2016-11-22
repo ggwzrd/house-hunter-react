@@ -1,0 +1,13 @@
+$breakpoint-tablet: 768px;
+@media (max-width: $breakpoint-tablet) {
+
+  .favourites-container{
+    position: fixed;
+    margin: auto;
+    left:22%;
+
+    &.visible{
+      display: none;
+    }
+  }
+}
