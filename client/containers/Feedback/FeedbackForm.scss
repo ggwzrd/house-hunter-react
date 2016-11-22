@@ -15,12 +15,12 @@
     width: 60px;
     position: absolute;
     right: 0;
-    background: url("http://i.imgur.com/1KxTui3.png") no-repeat;
+    background: url("http://i.imgur.com/h7ngBbY.png") no-repeat;
     border: 0;
     transition: 0.2s;
 
     &:hover{
-      background: url("http://i.imgur.com/ceKea9y.png") no-repeat;
+      background: url("http://i.imgur.com/SxUoymj.png") no-repeat;
     }
   }
 
@@ -154,20 +154,20 @@
           height: 35px;
           width: 35px;
           cursor: pointer;
-          background: url("http://i.imgur.com/CbePsYU.png") no-repeat;
+          background: url("http://i.imgur.com/Kt2kRfI.png") no-repeat;
           display: inline-block;
           background-size: contain;
           transition: 0.2s;
 
           &:hover{
-            background: url("http://i.imgur.com/8g1fPjj.png") no-repeat;
+            background: url("http://i.imgur.com/o7kqDjI.png") no-repeat;
           }
         }
       }
     }
 
     .ratings .rating.checked .star{
-      background: url("http://i.imgur.com/8g1fPjj.png") no-repeat;
+      background: url("http://i.imgur.com/o7kqDjI.png") no-repeat;
     }
   }
 }

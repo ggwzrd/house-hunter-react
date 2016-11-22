@@ -3,7 +3,7 @@ $breakpoint-mobile: 450px;
 
   .navbar{
     height: 50px;
-    
+
     ul{
 
       div{
@@ -11,6 +11,11 @@ $breakpoint-mobile: 450px;
         font-size: 12px;
         height: 50px;
         text-align: center;
+
+        li{
+          padding: 15px !important;
+          line-height: 22px !important;
+        }
       }
     }
   }
