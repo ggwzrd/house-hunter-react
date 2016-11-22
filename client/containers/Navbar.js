@@ -30,14 +30,14 @@ class Navbar extends Component {
       var scroll = $(window).scrollTop();
       if(scroll <= 100){
         $('.navbar').css({
-          'background-color': 'rgba(255,255,255,'+(scroll/100)+')',
+          'background-color': 'rgba(255,255,255,'+(scroll/100 > 0.60 ? 0.60 : scroll/100 )+')',
           'box-shadow': '1px 1px 15px rgba(0,0,0,'+(scroll/100)+')',
           'color': 'rgb(0,0,0)'
         });
         ((scroll === 0))? $('.navbar').find('li').css('color','white') : $('.navbar').find('li').css('color','rgba(0,0,0,'+(scroll/10)+')');
       }else{
         $('.navbar').css({
-          'background-color': 'rgba(255,255,255, 1)',
+          'background-color': 'rgba(255,255,255, 0.60)',
           'box-shadow': '1px 1px 15px rgba(0,0,0, 1)',
           'color': 'rgb(0,0,0)'
         });
