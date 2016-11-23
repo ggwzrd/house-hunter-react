@@ -132,11 +132,14 @@ class FacebookApi {
 
   render(elements){
     // FB.XFBML.parse()
-
-    for(var element of elements){
-      FB.XFBML.parse($(element).parent()[0])
-      $(element).removeClass('fb_iframe_widget fb-post')
-      $(element).addClass('fb-xfbml-parse-ignore')
+    if(elements.length > 0){
+      for(let i = 0; i < elements.length; i++){
+        FB.XFBML.parse($(elements[i]).parent()[0])
+        $(elements[i]).removeClass('fb_iframe_widget fb-post')
+        $(elements[i]).addClass('fb-xfbml-parse-ignore')
+      }
+    }else{
+      return false
     }
   }
 
