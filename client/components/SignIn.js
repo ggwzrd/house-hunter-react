@@ -76,7 +76,7 @@ class SignIn extends Component {
     const { currentUser } = this.props
 
     return(
-      <div className={ `wrapper sign-in ${ !currentUser.hasOwnProperty('facebook') && currentUser.facebook.authStatus === 'connected' ? 'hidden' : null }`} >
+      <div className={ `wrapper sign-in ${ currentUser.hasOwnProperty('facebook') && currentUser.facebook.authStatus === 'connected' ? 'hidden' : null }`} >
         <img src="http://i.imgur.com/ZUD5bRp.png" className="logo-auth" />
         <RaisedButton
           className={ currentUser.hasOwnProperty('facebook') && currentUser.facebook.authStatus === 'connected' ? 'login hidden' : 'login' }
