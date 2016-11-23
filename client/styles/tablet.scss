@@ -1,13 +1,8 @@
 $breakpoint-tablet: 900px;
 @media (max-width: $breakpoint-tablet) {
 
-  .app{
-    display: block !important;
-  }
-  .feed{
-    width: 100% !important;
-    position: absolute;
-    margin:auto;
+  .heart{
+    margin-left: 130px !important;
   }
   .navbar ul div:first-child{
     display: inline-block;
