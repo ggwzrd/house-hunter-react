@@ -6,7 +6,7 @@ class AppBackground extends Component {
     const { imageUrl } = this.props
 
     return (
-      <img src={imageUrl} className="logo" />
+      <a href="http://househunter.codaisseur.cloud/offers"> <div className="logo" ></div></a>
     )
   }
 }
