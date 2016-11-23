@@ -5,6 +5,7 @@ import { history } from '../store'
 
 // components
 import FacebookAuth from '../components/FacebookAuth'
+import Logo from '../components/Logo'
 
 // actions
 import appLoading from '../actions/loading'
@@ -65,7 +66,7 @@ class Navbar extends Component {
     return (
       <div key={ index }>
         <a href='#' onClick={ this.selected.bind(this, { name: page.name, selected: true }) }>
-          <li className={ currentPage.name === page.name ? 'selected' : null } >{ page.name.toUpperCase() }</li>
+          <li className={ currentPage.name === page.name ? 'selected' : null } >{ page.name }</li>
         </a>
       </div>
     )
@@ -75,6 +76,7 @@ class Navbar extends Component {
 
     return(
       <div className='navbar' >
+        <Logo imageUrl={ 'http://cd.sseu.re/house-hunter-logo-white.png' }/>
         <ul>
           { PAGES.map( this.renderPageTabs.bind(this) )}
         </ul>

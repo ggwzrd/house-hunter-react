@@ -11,16 +11,22 @@
 
 
    .feedback-btn{
-    height: 230px;
-    width: 60px;
+    height: 150px;
+    width: 45px;
     position: absolute;
     right: 0;
-    background: url("http://i.imgur.com/h7ngBbY.png") no-repeat;
+    background: url("http://i.imgur.com/2zdLlDa.png") no-repeat;
+    background-size: contain;
     border: 0;
     transition: 0.2s;
 
     &:hover{
-      background: url("http://i.imgur.com/SxUoymj.png") no-repeat;
+      background: url("http://i.imgur.com/hGBXfiO.png") no-repeat;
+      background-size: contain;
+    }
+    &:focus{
+      border: 0;
+      outline:0;
     }
   }
 
@@ -29,15 +35,16 @@
     width: 427px;
     height: 239px;
     position: absolute;
-    right: 40px;
-    background: url("http://i.imgur.com/LEpkCkx.png") no-repeat;
+    top: -6px;
+    right: 45px;
+    background: url("http://i.imgur.com/z2BJTuM.png") no-repeat;
     background-size: contain;
     overflow: hidden;
-    display: none;
+    opacity: 0;
     transition: 0.2s;
 
     &.show{
-      display: inline-block;
+      opacity: 100;
     }
 
     .controllers{
@@ -47,8 +54,8 @@
       display: flex;
       justify-content: space-between;
       color: #CCC;
-      margin-top: 190px;
-      margin-left: 90px;
+      margin-top: 185px;
+      margin-left: 110px;
 
 
       div{
@@ -69,7 +76,7 @@
       height: 30px;
       text-align: center;
       margin-top: 10px;
-      margin-left: 340px;
+      margin-left: 380px;
       position: fixed;
       float: right;
       cursor: pointer;
@@ -124,7 +131,7 @@
       height: 50px;
       color: #4A90E2;
       font-size: 24px;
-      margin-left: 60px;
+      margin-left: 80px;
       margin-top: 50px;
     }
 
@@ -135,7 +142,7 @@
 
     .ratings{
       height: 35px;
-      margin: 5px 85px;
+      margin: 5px 105px;
 
 
       .rating{

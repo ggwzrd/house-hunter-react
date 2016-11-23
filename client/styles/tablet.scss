@@ -4,6 +4,9 @@ $breakpoint-tablet: 900px;
   .navbar ul div:first-child{
     display: inline-block;
   }
+  .logo{
+    display: none;
+  }
   .favourites-container{
     position: fixed;
     margin: auto;
