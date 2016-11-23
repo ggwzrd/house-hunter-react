@@ -53,17 +53,17 @@ class SignIn extends Component {
             // updateFacebookUser(res.data[0] , {facebook: facebookApi.user})
           })
           .catch((error) => {
-            console.log('User not found: ', rerror)
+            console.log('User not found: ', error)
           })
       }
     }, 3000)
   }
 
   handleClick(){
-    const { authStatus } = this.props.currentUser.facebook
+    const { currentUser } = this.props
 
     // handling the different cases (authorization or login)
-    authStatus === "not_authorized" ? window.location.replace('/auth/facebook') : facebookApi.handleClick()
+    currentUser.hasOwnProperty('facebook') && authStatus === "not_authorized" ? window.location.replace('/auth/facebook') : facebookApi.handleClick()
   }
 
   componentDidUpdate(){
