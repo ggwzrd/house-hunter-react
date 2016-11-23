@@ -79,9 +79,9 @@ class SignIn extends Component {
       <div className={ `wrapper sign-in ${ currentUser.hasOwnProperty('facebook') && currentUser.facebook.authStatus === 'connected' ? 'hidden' : null }`} >
         <RefreshIndicator
           size={150}
-          left={70}
+          left={0}
           top={100}
-          style={{ position: 'absolute', 'marginLeft': 'calc(39% - 10px)'}}
+          style={{ position: 'relative', display: 'block', margin: '-50px auto', right: '50px'}}
           loadingColor="#4080ff"
           status="loading"
         />

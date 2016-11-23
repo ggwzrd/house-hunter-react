@@ -1,9 +1,6 @@
 $breakpoint-tablet: 900px;
 @media (max-width: $breakpoint-tablet) {
 
-  .heart{
-    margin-left: 130px !important;
-  }
   .navbar ul div:first-child{
     display: inline-block;
   }
