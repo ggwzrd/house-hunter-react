@@ -62,9 +62,9 @@ class SignIn extends Component {
 
   handleClick(){
     const { currentUser } = this.props
-
+    console.log('current user:', currentUser )
     // handling the different cases (authorization or login)
-    currentUser.hasOwnProperty('facebook') && authStatus === "not_authorized" ? window.location.replace('/auth/facebook') : facebookApi.handleClick()
+    currentUser.hasOwnProperty('facebook') && currentUser.facebook.authStatus === 'not_authorized' ? window.location.replace('/auth/facebook') : facebookApi.handleClick()
   }
 
   componentDidUpdate(){
