@@ -1,5 +1,5 @@
 {
-  "host": "HouseHunter-app.feathersjs.com",
+  "host": "househunter.codaisseur.cloud",
   "port": 5000,
   "mongodb": "MONGODB_URL",
   "public": "../static/",
@@ -7,12 +7,20 @@
     "token": {
       "secret": "FEATHERS_AUTH_SECRET"
     },
+    "local": false,
+    "shouldSetupSuccessRoute": true,
+    "shouldSetupFailureRoute": true,
+    "successRedirect": "/authenticate",
+    "failureRedirect": "/auth/failure",
     "facebook": {
-      "clientID": "1250395821686383",
-      "clientSecret": "a0d0682cfd739c31d96fe6c6dfbf7fdc",
+      "clientID": "CLIENT_ID",
+      "clientSecret": "CLIENT_SECRET",
       "permissions": {
-        "scope": ["public_profile","giulio.gallerini.work@hotmail.com"]
+        "scope": ["public_profile","email"]
       }
     },
+    "cookie": {
+      "name": "house-hunter-cookie"
+    }
   }
 }
