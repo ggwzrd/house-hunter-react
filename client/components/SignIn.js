@@ -47,8 +47,9 @@ class SignIn extends Component {
         api.service('users').find({ facebookId: facebookApi.user.id })
           .then((res) =>{
             // checking if authStatus is changed and updating it if true
-            res.data[0].facebook.authStatus !== facebookApi.user.authStatus ?
-              updateAuthStatus(Object.assign({}, res.data[0], { facebook: facebookApi.user })) : null
+            console.log(res.data[0], facebookApi)
+            res.data[0] && res.data[0].facebook.authStatus !== facebookApi.user.authStatus ?
+              updateAuthStatus(Object.assign({}, res.data[0], { facebook: facebookApi.user })) : updateAuthStatus({ facebook: facebookApi.user })
 
             // updateFacebookUser(res.data[0] , {facebook: facebookApi.user})
           })
