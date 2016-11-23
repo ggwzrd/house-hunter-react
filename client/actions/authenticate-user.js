@@ -3,6 +3,7 @@ import appLoading from './loading'
 import userAuthenticated from './user-authenticated'
 import destroySessionUser from './destroy-session-user'
 
+
 export const AUTHENTICATE_USER = 'AUTHENTICATE_USER'
 
 const authenticateUser = (user) => {
