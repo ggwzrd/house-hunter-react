@@ -1,11 +1,18 @@
 {
   "name": "HouseHunter",
   "description": "House Hunter with React and FeathersJS.",
-  "version": "0.0.0",
-  "homepage": "",
+  "version": "0.0.1",
+  "homepage": "/offers",
   "main": "src/",
   "keywords": [
-    "feathers"
+    "feathers",
+    "house",
+    "apartment",
+    "rent",
+    "looking",
+    "amsterdam",
+    "city",
+    "react"
   ],
   "license": "MIT",
   "repository": {},
@@ -13,7 +20,8 @@
   "contributors": [],
   "bugs": {},
   "engines": {
-    "node": ">= 0.12.0"
+    "node": "6.9.1",
+    "npm": "3.10.8"
   },
   "scripts": {
     "test": "npm run jshint && npm run mocha",
