@@ -36,15 +36,8 @@ class Navbar extends Component {
           'color': 'rgb(0,0,0)'
         });
 
-        $('.logo').css({
-          'background-image': 'url("http://cd.sseu.re/house-hunter-logo-white.png")',
-        });
         ((scroll === 0))? $('.navbar').find('li').css('color','white') : $('.navbar').find('li').css('color','rgba(0,0,0,'+(scroll/10)+')');
       }else{
-
-        $('.logo').css({
-          'background-image': 'url("http://cd.sseu.re/house-hunter-logo-black-white.png")',
-        });
 
         $('.navbar').css({
           'background-color': 'rgba(255,255,255, 0.60)',

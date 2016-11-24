@@ -77,7 +77,7 @@ class SignIn extends Component {
 
     return(
       <div className={ `wrapper sign-in ${ currentUser.hasOwnProperty('facebook') && currentUser.facebook.authStatus === 'connected' ? 'hidden' : null }`} >
-        <img src="http://i.imgur.com/ZUD5bRp.png" className="logo-auth" />
+        <img src="http://cd.sseu.re/logo-600-100.svg" className="logo-auth" />
         <RaisedButton
           className={ currentUser.hasOwnProperty('facebook') && currentUser.facebook.authStatus === 'connected' ? 'login hidden' : 'login' }
           primary={true}
