@@ -16,7 +16,7 @@ class API {
       // Use localStorage to store our login token
       .configure(feathers.authentication({
         storage: window.localStorage,
-        cookie: 'house-hunter-cookie'
+        cookie: 'feathers-jwt'
       }));
   }
 

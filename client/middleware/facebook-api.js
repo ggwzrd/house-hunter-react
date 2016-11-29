@@ -2,6 +2,7 @@
 import io from 'socket.io-client';
 import feathers from 'feathers-client';
 import updateFacebookUser from '../actions/update-facebook-user'
+import api from './api'
 
 // costants
 const GROUPS = [
@@ -106,6 +107,13 @@ class FacebookApi {
         this.accessTokenExpired = true
         this.user.accessToken = response.authResponse.accessToken
         this.user.authStatus = 'connected'
+        api.authenticate()
+        .then((res) => {
+          console.log('authorization successful: ', res)
+        })
+        .catch((error) => {
+          console.log('authorization failed: ', error)
+        })
       }
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.

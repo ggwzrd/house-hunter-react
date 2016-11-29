@@ -9,6 +9,10 @@ module.exports = function() {
   // handling middleware should go last.
   const app = this;
 
+  app.get('/auth/success', function(req, res){
+    res.sendFile(path.resolve(__dirname, '../..', 'client/components', 'FacebookAuth.js'));
+  });
+
   // All GET requests to unknown paths go through React's index to facilitate
   // React Router. Feathers middleware should go above here.
   app.get('*', function(req, res) {

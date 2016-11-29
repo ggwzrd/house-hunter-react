@@ -4,12 +4,11 @@
   "mongodb": "mongodb://localhost:27017/HouseHunter16",
   "public": "../client/",
   "auth": {
+    "shouldSetupSuccessRoute": false,
+    "shouldSetupFailureRoute": false,
     "token": {
       "secret": "cdnFQSvsERwWU3yNrlrxPlWfJM4+NmA+A4I2jWUPonefFgVW5at8Jm6N79M23xzEWrzAl41Z/6/JQ3mxF45syg=="
     },
-    "local": false,
-    "shouldSetupSuccessRoute": true,
-    "shouldSetupFailureRoute": true,
     "successRedirect": "/authenticate",
     "failureRedirect": "/auth/failure",
     "facebook": {
