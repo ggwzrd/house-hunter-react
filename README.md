@@ -1,8 +1,14 @@
-# FeathersJS + React + Webpack
+# [HOUSE HUNTER (React.js)](http://househunter.codaisseur.cloud/home)
+
+<img src="http://i.imgur.com/undefined.png" width=600px />
 
 ## About
 
-This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
+I always had a problem when looking for an place to stay in Amsterdam, where to look for it.
+The agencies are too expensive, Kamernet or Craiglist are full of spam and Facebook is too chaotic.
+That's why I created House Hunter, a platform where you can find all Facebook's posts of the main house renting groups organized in offers and requests.
+
+*This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.*
 
 ## Getting Started
 
