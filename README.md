@@ -1,6 +1,6 @@
 # [HOUSE HUNTER (React.js)](http://househunter.codaisseur.cloud/home)
 
-<img src="http://i.imgur.com/NYbdcmc.jpg" width=600px />
+<img src="http://i.imgur.com/NYbdcmc.jpg" width=800px />
 
 ## About
 
